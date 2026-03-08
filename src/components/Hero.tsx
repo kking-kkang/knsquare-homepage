@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight, ChevronDown, Trophy } from "lucide-react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import KnowledgeGraph from "./KnowledgeGraph";
@@ -25,12 +25,25 @@ export default function Hero() {
       <div className="relative z-10 flex-1 flex items-center">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full pt-24 pb-16">
           <div className="max-w-xl">
-            {/* Badge */}
+            {/* Award badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-border shadow-sm mb-8"
+              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-amber-50/90 backdrop-blur-sm border border-amber-200/60 shadow-sm mb-4"
+            >
+              <Trophy size={14} className="text-amber-500" />
+              <span className="text-xs font-semibold text-amber-700">
+                2026 K-ICT 대상 수상 — AI 챗봇 부문
+              </span>
+            </motion.div>
+
+            {/* Company badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-border shadow-sm mb-8 w-fit"
             >
               <Image
                 src="/지식광장네트워크 로고.png"
@@ -102,6 +115,7 @@ export default function Hero() {
             >
               {[
                 { value: "2022", label: "설립" },
+                { value: "K-ICT", label: "대상 수상" },
                 { value: "3건", label: "특허 출원" },
                 { value: "12편", label: "KCI 논문" },
               ].map((stat) => (

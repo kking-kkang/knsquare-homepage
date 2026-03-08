@@ -24,7 +24,7 @@ const stats = [
   { icon: Users, value: 10, label: "컨설팅 기업", suffix: "+" },
 ];
 
-const milestones = [
+const milestones: { year: string; items: string[]; highlight?: boolean }[] = [
   {
     year: "2022",
     items: [
@@ -47,6 +47,13 @@ const milestones = [
       "대구·부산 10개 기업 AI 컨설팅 수행",
       "CTR(주) KPI 예측 및 불량 분석 모델 개발",
       "글로벌 공급망 리스크 대응 연구과제 착수 (3년, ~2027)",
+    ],
+  },
+  {
+    year: "2026",
+    highlight: true,
+    items: [
+      "제12회 대한민국 산업대상 K-ICT 대상 수상 (AI 챗봇 부문)",
     ],
   },
 ];
@@ -132,16 +139,20 @@ export default function About() {
               <h3 className="text-lg font-bold text-navy mb-5">연혁</h3>
               <div className="space-y-6">
                 {milestones.map((m) => (
-                  <div key={m.year} className="flex gap-5">
+                  <div key={m.year} className={`flex gap-5 ${m.highlight ? "p-4 -mx-4 rounded-xl bg-amber-50/60 border border-amber-200/40" : ""}`}>
                     <div className="shrink-0">
-                      <span className="inline-flex items-center justify-center w-14 h-8 rounded-lg bg-navy text-white text-sm font-bold">
+                      <span className={`inline-flex items-center justify-center w-14 h-8 rounded-lg text-sm font-bold ${
+                        m.highlight ? "bg-amber-500 text-white" : "bg-navy text-white"
+                      }`}>
                         {m.year}
                       </span>
                     </div>
                     <ul className="space-y-1.5">
                       {m.items.map((item) => (
-                        <li key={item} className="text-sm text-text-secondary leading-relaxed flex gap-2">
-                          <span className="text-primary mt-1.5 shrink-0">&#8226;</span>
+                        <li key={item} className={`text-sm leading-relaxed flex gap-2 ${m.highlight ? "text-amber-800 font-semibold" : "text-text-secondary"}`}>
+                          <span className={`mt-1.5 shrink-0 ${m.highlight ? "text-amber-500" : "text-primary"}`}>
+                            {m.highlight ? "★" : "•"}
+                          </span>
                           {item}
                         </li>
                       ))}
