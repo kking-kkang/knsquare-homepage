@@ -9,12 +9,12 @@ interface KGNode {
   targetY: number;
   radius: number;
   label: string;
-  group: number; // 0=core, 1=inner, 2=outer
+  group: number;
   angle: number;
   orbitRadius: number;
   orbitSpeed: number;
-  appeared: boolean;
   appearTime: number;
+  color: string;
 }
 
 interface KGEdge {
@@ -24,41 +24,49 @@ interface KGEdge {
   delay: number;
 }
 
-// Real concepts from KNSquare's product
-const NODE_DATA: { label: string; group: number }[] = [
-  { label: "Knowledge\nGraph", group: 0 },
-  // Inner ring — core tech
-  { label: "온톨로지", group: 1 },
-  { label: "엔터티 추출", group: 1 },
-  { label: "Vector RAG", group: 1 },
-  { label: "Graph RAG", group: 1 },
-  { label: "Kraph", group: 1 },
-  { label: "KNie", group: 1 },
-  // Outer ring — data & outputs
+const COLORS = {
+  core: "#2563EB",
+  inner: "#3B82F6",
+  outer: "#64748B",
+  accent1: "#06B6D4",
+  accent2: "#7C3AED",
+  accent3: "#10B981",
+};
+
+const NODE_DATA: { label: string; group: number; color?: string }[] = [
+  { label: "Knowledge\nGraph", group: 0, color: COLORS.core },
+  { label: "온톨로지", group: 1, color: COLORS.inner },
+  { label: "엔터티 추출", group: 1, color: COLORS.accent1 },
+  { label: "Vector RAG", group: 1, color: COLORS.accent2 },
+  { label: "Graph RAG", group: 1, color: COLORS.inner },
+  { label: "Kraph", group: 1, color: COLORS.core },
+  { label: "KNie", group: 1, color: COLORS.accent1 },
   { label: "PDF", group: 2 },
   { label: "DOCX", group: 2 },
   { label: "XLSX", group: 2 },
-  { label: "추론 엔진", group: 2 },
-  { label: "출처 검증", group: 2 },
+  { label: "추론", group: 2, color: COLORS.accent3 },
+  { label: "출처 검증", group: 2, color: COLORS.accent3 },
   { label: "의사결정", group: 2 },
-  { label: "Q&A 응답", group: 2 },
+  { label: "Q&A", group: 2, color: COLORS.accent1 },
   { label: "관계 매핑", group: 2 },
+  { label: "LLM", group: 2, color: COLORS.accent2 },
+  { label: "OCR", group: 2 },
 ];
 
 const EDGE_DEFS: [number, number][] = [
   [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6],
-  [1, 2], [2, 5], [5, 0], [3, 6], [4, 6], [1, 5],
-  [5, 7], [5, 8], [5, 9], [5, 14],
-  [6, 10], [6, 11], [6, 12], [6, 13],
-  [3, 10], [4, 11], [2, 14], [1, 9],
+  [1, 2], [2, 5], [3, 6], [4, 6], [1, 5], [3, 4],
+  [5, 7], [5, 8], [5, 9], [5, 14], [5, 16],
+  [6, 10], [6, 11], [6, 13], [6, 15],
+  [2, 14], [1, 9], [4, 12], [3, 15],
 ];
 
 export default function KnowledgeGraph() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animRef = useRef(0);
-  const mouseRef = useRef({ x: -1000, y: -1000 });
+  const mouseRef = useRef({ x: -9999, y: -9999 });
 
-  const init = useCallback(() => {
+  const setup = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return null;
     const ctx = canvas.getContext("2d");
@@ -66,98 +74,71 @@ export default function KnowledgeGraph() {
 
     const dpr = window.devicePixelRatio || 1;
     const parent = canvas.parentElement!;
-    let W = parent.clientWidth;
-    let H = parent.clientHeight;
 
     const resize = () => {
-      W = parent.clientWidth;
-      H = parent.clientHeight;
+      const W = parent.clientWidth;
+      const H = parent.clientHeight;
       canvas.width = W * dpr;
       canvas.height = H * dpr;
       canvas.style.width = `${W}px`;
       canvas.style.height = `${H}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      return { W, H };
     };
-    resize();
 
-    const cx = W * 0.5;
+    const { W, H } = resize();
+    const cx = W * 0.55;
     const cy = H * 0.48;
-    const baseRadius = Math.min(W, H) * 0.32;
+    const base = Math.min(W, H) * 0.34;
 
-    // Create nodes
     const nodes: KGNode[] = NODE_DATA.map((d, i) => {
-      let angle = 0;
-      let orbitR = 0;
-      let r = 6;
-
-      if (d.group === 0) {
-        orbitR = 0;
-        r = 24;
-      } else if (d.group === 1) {
-        const innerCount = NODE_DATA.filter((n) => n.group === 1).length;
-        const innerIdx = NODE_DATA.filter((n, j) => n.group === 1 && j < i).length;
-        angle = (innerIdx / innerCount) * Math.PI * 2 - Math.PI / 2;
-        orbitR = baseRadius * 0.48;
-        r = 14;
+      let angle = 0, orbitR = 0, r = 6;
+      if (d.group === 0) { orbitR = 0; r = 28; }
+      else if (d.group === 1) {
+        const cnt = NODE_DATA.filter(n => n.group === 1).length;
+        const idx = NODE_DATA.filter((n, j) => n.group === 1 && j < i).length;
+        angle = (idx / cnt) * Math.PI * 2 - Math.PI / 2;
+        orbitR = base * 0.52; r = 16;
       } else {
-        const outerCount = NODE_DATA.filter((n) => n.group === 2).length;
-        const outerIdx = NODE_DATA.filter((n, j) => n.group === 2 && j < i).length;
-        angle = (outerIdx / outerCount) * Math.PI * 2 - Math.PI / 3;
-        orbitR = baseRadius * 0.88;
-        r = 10;
+        const cnt = NODE_DATA.filter(n => n.group === 2).length;
+        const idx = NODE_DATA.filter((n, j) => n.group === 2 && j < i).length;
+        angle = (idx / cnt) * Math.PI * 2 - Math.PI / 4;
+        orbitR = base * 0.92; r = 10;
       }
 
       return {
-        x: cx,
-        y: cy,
+        x: cx, y: cy,
         targetX: cx + Math.cos(angle) * orbitR,
         targetY: cy + Math.sin(angle) * orbitR,
-        radius: r,
-        label: d.label,
-        group: d.group,
-        angle,
-        orbitRadius: orbitR,
-        orbitSpeed: 0.0002 + Math.random() * 0.0003,
-        appeared: false,
-        appearTime: d.group === 0 ? 200 : d.group === 1 ? 600 + i * 100 : 1200 + i * 80,
+        radius: r, label: d.label, group: d.group,
+        angle, orbitRadius: orbitR,
+        orbitSpeed: (d.group === 1 ? 0.0003 : 0.0002) + Math.random() * 0.0002,
+        appearTime: d.group === 0 ? 100 : d.group === 1 ? 400 + i * 120 : 1000 + i * 70,
+        color: d.color || COLORS.outer,
       };
     });
 
-    // Create edges
     const edges: KGEdge[] = EDGE_DEFS.map(([from, to], i) => ({
-      from,
-      to,
-      progress: 0,
-      delay: 1800 + i * 60,
+      from, to, progress: 0, delay: 1600 + i * 50,
     }));
 
-    return { ctx, nodes, edges, resize, W: () => W, H: () => H, cx, cy, baseRadius, dpr };
+    return { ctx, canvas, nodes, edges, resize, cx, cy, base };
   }, []);
 
   useEffect(() => {
-    const state = init();
+    const state = setup();
     if (!state) return;
-
-    const { ctx, nodes, edges, resize } = state;
-    const canvas = canvasRef.current!;
+    const { ctx, canvas, nodes, edges, resize } = state;
     const startTime = performance.now();
 
-    const onResize = () => {
-      resize();
-      // Recalculate positions
-      const parent = canvas.parentElement!;
-      const W = parent.clientWidth;
-      const H = parent.clientHeight;
-      const cx = W * 0.5;
-      const cy = H * 0.48;
-      const baseRadius = Math.min(W, H) * 0.32;
-
-      nodes.forEach((n) => {
-        if (n.group === 0) {
-          n.targetX = cx;
-          n.targetY = cy;
-        } else {
-          const orbitR = n.group === 1 ? baseRadius * 0.48 : baseRadius * 0.88;
+    const handleResize = () => {
+      const { W, H } = resize();
+      const cx = W * 0.55, cy = H * 0.48;
+      const base = Math.min(W, H) * 0.34;
+      nodes.forEach(n => {
+        if (n.group === 0) { n.targetX = cx; n.targetY = cy; }
+        else {
+          const orbitR = n.group === 1 ? base * 0.52 : base * 0.92;
           n.orbitRadius = orbitR;
           n.targetX = cx + Math.cos(n.angle) * orbitR;
           n.targetY = cy + Math.sin(n.angle) * orbitR;
@@ -165,194 +146,190 @@ export default function KnowledgeGraph() {
       });
     };
 
-    const onMouse = (e: MouseEvent) => {
+    const handleMouse = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
       mouseRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
     };
+    const handleLeave = () => { mouseRef.current = { x: -9999, y: -9999 }; };
 
-    window.addEventListener("resize", onResize);
-    canvas.addEventListener("mousemove", onMouse);
+    window.addEventListener("resize", handleResize);
+    canvas.addEventListener("mousemove", handleMouse);
+    canvas.addEventListener("mouseleave", handleLeave);
 
     const draw = (now: number) => {
       const elapsed = now - startTime;
-      const parent = canvas.parentElement!;
-      const W = parent.clientWidth;
-      const H = parent.clientHeight;
-      const cx = W * 0.5;
-      const cy = H * 0.48;
+      const W = canvas.parentElement!.clientWidth;
+      const H = canvas.parentElement!.clientHeight;
+      const cx = W * 0.55, cy = H * 0.48;
 
       ctx.clearRect(0, 0, W, H);
 
-      // Gentle orbit movement
-      nodes.forEach((n) => {
+      // Orbit drift
+      nodes.forEach(n => {
         if (n.group === 0) return;
         n.angle += n.orbitSpeed;
-        n.targetX = cx + Math.cos(n.angle) * n.orbitRadius;
-        n.targetY = cy + Math.sin(n.angle) * n.orbitRadius;
+        n.targetX = (n.group === 0 ? cx : cx) + Math.cos(n.angle) * n.orbitRadius;
+        n.targetY = (n.group === 0 ? cy : cy) + Math.sin(n.angle) * n.orbitRadius;
       });
 
-      // Animate node appearance (fly from center)
-      nodes.forEach((n) => {
-        if (!n.appeared && elapsed > n.appearTime) {
-          n.appeared = true;
-        }
-        if (n.appeared) {
-          n.x += (n.targetX - n.x) * 0.06;
-          n.y += (n.targetY - n.y) * 0.06;
-        } else {
-          n.x = cx;
-          n.y = cy;
-        }
+      // Spring toward target
+      nodes.forEach(n => {
+        if (elapsed < n.appearTime) { n.x = cx; n.y = cy; return; }
+        n.x += (n.targetX - n.x) * 0.045;
+        n.y += (n.targetY - n.y) * 0.045;
       });
 
-      // Mouse interaction — slight repel
-      const mx = mouseRef.current.x;
-      const my = mouseRef.current.y;
-      nodes.forEach((n) => {
-        const dx = n.x - mx;
-        const dy = n.y - my;
+      // Mouse repel
+      const mx = mouseRef.current.x, my = mouseRef.current.y;
+      nodes.forEach(n => {
+        const dx = n.x - mx, dy = n.y - my;
         const dist = Math.hypot(dx, dy);
-        if (dist < 120 && dist > 0) {
-          const force = (120 - dist) / 120 * 3;
-          n.x += (dx / dist) * force;
-          n.y += (dy / dist) * force;
+        if (dist < 100 && dist > 0) {
+          const f = (100 - dist) / 100 * 4;
+          n.x += (dx / dist) * f;
+          n.y += (dy / dist) * f;
         }
       });
 
-      // Draw orbital rings (very subtle)
-      [0.48, 0.88].forEach((mult) => {
-        const baseRadius = Math.min(W, H) * 0.32;
-        const r = baseRadius * mult;
-        const ringAlpha = Math.min(1, Math.max(0, (elapsed - 400) / 1500)) * 0.08;
+      // Orbit rings
+      const base = Math.min(W, H) * 0.34;
+      [0.52, 0.92].forEach(mult => {
+        const ringAlpha = Math.min(0.06, (elapsed - 300) / 2000 * 0.06);
+        if (ringAlpha <= 0) return;
         ctx.beginPath();
-        ctx.arc(cx, cy, r, 0, Math.PI * 2);
+        ctx.arc(cx, cy, base * mult, 0, Math.PI * 2);
         ctx.strokeStyle = `rgba(37, 99, 235, ${ringAlpha})`;
         ctx.lineWidth = 1;
-        ctx.setLineDash([4, 8]);
+        ctx.setLineDash([3, 8]);
         ctx.stroke();
         ctx.setLineDash([]);
       });
 
-      // Draw edges with animated progress
-      edges.forEach((e) => {
+      // Edges
+      edges.forEach(e => {
         if (elapsed < e.delay) return;
-        e.progress = Math.min(1, (elapsed - e.delay) / 800);
-
-        const a = nodes[e.from];
-        const b = nodes[e.to];
-        if (!a.appeared || !b.appeared) return;
+        e.progress = Math.min(1, (elapsed - e.delay) / 700);
+        const a = nodes[e.from], b = nodes[e.to];
+        if (elapsed < a.appearTime || elapsed < b.appearTime) return;
 
         const ex = a.x + (b.x - a.x) * e.progress;
         const ey = a.y + (b.y - a.y) * e.progress;
 
-        // Edge glow
+        // Glow
         ctx.beginPath();
         ctx.moveTo(a.x, a.y);
         ctx.lineTo(ex, ey);
-        ctx.strokeStyle = `rgba(37, 99, 235, ${0.06 * e.progress})`;
-        ctx.lineWidth = 4;
+        ctx.strokeStyle = `rgba(37, 99, 235, ${0.05 * e.progress})`;
+        ctx.lineWidth = 5;
         ctx.stroke();
 
-        // Edge line
+        // Line
         ctx.beginPath();
         ctx.moveTo(a.x, a.y);
         ctx.lineTo(ex, ey);
-        ctx.strokeStyle = `rgba(59, 130, 246, ${0.25 * e.progress})`;
-        ctx.lineWidth = 1.5;
+        ctx.strokeStyle = `rgba(148, 163, 184, ${0.2 * e.progress})`;
+        ctx.lineWidth = 1;
         ctx.stroke();
 
-        // Traveling particle
+        // Particle
         if (e.progress >= 1) {
-          const t = ((elapsed - e.delay - 800) * 0.0005) % 1;
+          const t = ((elapsed - e.delay - 700) * 0.0004) % 1;
           const px = a.x + (b.x - a.x) * t;
           const py = a.y + (b.y - a.y) * t;
+          const grad = ctx.createRadialGradient(px, py, 0, px, py, 4);
+          grad.addColorStop(0, `rgba(59, 130, 246, 0.8)`);
+          grad.addColorStop(1, `rgba(59, 130, 246, 0)`);
           ctx.beginPath();
-          ctx.arc(px, py, 2, 0, Math.PI * 2);
-          ctx.fillStyle = "rgba(59, 130, 246, 0.6)";
+          ctx.arc(px, py, 4, 0, Math.PI * 2);
+          ctx.fillStyle = grad;
           ctx.fill();
         }
       });
 
-      // Draw nodes
-      nodes.forEach((n) => {
-        if (!n.appeared) return;
+      // Nodes
+      nodes.forEach(n => {
+        if (elapsed < n.appearTime) return;
+        const alpha = Math.min(1, (elapsed - n.appearTime) / 500);
 
-        const nodeAlpha = Math.min(1, (elapsed - n.appearTime) / 600);
+        // Glow
+        const glowR = n.radius * (n.group === 0 ? 3 : 2.2);
+        const gGrad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, glowR);
+        gGrad.addColorStop(0, `${n.color}${Math.round(alpha * 20).toString(16).padStart(2, "0")}`);
+        gGrad.addColorStop(1, `${n.color}00`);
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, glowR, 0, Math.PI * 2);
+        ctx.fillStyle = gGrad;
+        ctx.fill();
 
-        // Outer glow
-        if (n.group <= 1) {
-          const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.radius * 2.5);
-          grad.addColorStop(0, `rgba(37, 99, 235, ${0.12 * nodeAlpha})`);
-          grad.addColorStop(1, "rgba(37, 99, 235, 0)");
-          ctx.beginPath();
-          ctx.arc(n.x, n.y, n.radius * 2.5, 0, Math.PI * 2);
-          ctx.fillStyle = grad;
-          ctx.fill();
-        }
-
-        // Node body
+        // Body
         ctx.beginPath();
         ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
-
         if (n.group === 0) {
-          // Core node: gradient fill
-          const grad = ctx.createRadialGradient(n.x - 4, n.y - 4, 0, n.x, n.y, n.radius);
-          grad.addColorStop(0, `rgba(59, 130, 246, ${nodeAlpha})`);
-          grad.addColorStop(1, `rgba(29, 78, 216, ${nodeAlpha})`);
+          const grad = ctx.createRadialGradient(n.x - 6, n.y - 6, 0, n.x, n.y, n.radius);
+          grad.addColorStop(0, "#3B82F6");
+          grad.addColorStop(1, "#1D4ED8");
           ctx.fillStyle = grad;
           ctx.fill();
-          // Border
-          ctx.strokeStyle = `rgba(96, 165, 250, ${0.5 * nodeAlpha})`;
+          ctx.strokeStyle = `rgba(96, 165, 250, ${0.6 * alpha})`;
           ctx.lineWidth = 2;
           ctx.stroke();
         } else if (n.group === 1) {
-          ctx.fillStyle = `rgba(239, 246, 255, ${nodeAlpha})`;
+          ctx.fillStyle = "#FFFFFF";
           ctx.fill();
-          ctx.strokeStyle = `rgba(59, 130, 246, ${0.4 * nodeAlpha})`;
-          ctx.lineWidth = 1.5;
+          ctx.strokeStyle = `${n.color}${Math.round(alpha * 100).toString(16).padStart(2, "0")}`;
+          ctx.lineWidth = 2;
           ctx.stroke();
         } else {
-          ctx.fillStyle = `rgba(248, 250, 252, ${nodeAlpha})`;
+          ctx.fillStyle = "#FFFFFF";
           ctx.fill();
-          ctx.strokeStyle = `rgba(203, 213, 225, ${0.5 * nodeAlpha})`;
+          ctx.strokeStyle = `rgba(203, 213, 225, ${0.6 * alpha})`;
           ctx.lineWidth = 1;
           ctx.stroke();
+          // Small colored dot
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, 3, 0, Math.PI * 2);
+          ctx.fillStyle = `${n.color}${Math.round(alpha * 180).toString(16).padStart(2, "0")}`;
+          ctx.fill();
         }
 
-        // Label
-        const labelAlpha = Math.min(1, Math.max(0, (elapsed - n.appearTime - 300) / 500));
-        if (labelAlpha > 0) {
-          ctx.textAlign = "center";
-          ctx.textBaseline = "middle";
+        // Labels
+        const lblAlpha = Math.min(1, Math.max(0, (elapsed - n.appearTime - 200) / 400));
+        if (lblAlpha <= 0) return;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
 
-          if (n.group === 0) {
-            ctx.font = `bold 13px Inter, sans-serif`;
-            ctx.fillStyle = `rgba(255, 255, 255, ${labelAlpha})`;
-            const lines = n.label.split("\n");
-            lines.forEach((line, li) => {
-              ctx.fillText(line, n.x, n.y + (li - (lines.length - 1) / 2) * 15);
-            });
-          } else {
-            const fontSize = n.group === 1 ? 11 : 10;
-            ctx.font = `500 ${fontSize}px Inter, "Noto Sans KR", sans-serif`;
-            ctx.fillStyle = `rgba(51, 65, 85, ${labelAlpha * 0.9})`;
+        if (n.group === 0) {
+          ctx.font = `bold 14px Inter, sans-serif`;
+          ctx.fillStyle = `rgba(255,255,255,${lblAlpha})`;
+          const lines = n.label.split("\n");
+          lines.forEach((l, li) => ctx.fillText(l, n.x, n.y + (li - (lines.length - 1) / 2) * 16));
+        } else {
+          const fs = n.group === 1 ? 11 : 9.5;
+          ctx.font = `600 ${fs}px Inter, "Noto Sans KR", sans-serif`;
+          const tw = ctx.measureText(n.label).width + 14;
+          const ph = fs + 10;
+          const py = n.y + n.radius + 10;
 
-            // Background pill
-            const textWidth = ctx.measureText(n.label).width + 12;
-            const pillH = fontSize + 8;
-            const pillY = n.y + n.radius + 8;
+          // Pill bg
+          ctx.fillStyle = `rgba(255,255,255,${lblAlpha * 0.92})`;
+          ctx.shadowColor = "rgba(0,0,0,0.06)";
+          ctx.shadowBlur = 8;
+          ctx.shadowOffsetY = 2;
+          ctx.beginPath();
+          ctx.roundRect(n.x - tw / 2, py - ph / 2, tw, ph, 6);
+          ctx.fill();
+          ctx.shadowColor = "transparent";
+          ctx.shadowBlur = 0;
+          ctx.shadowOffsetY = 0;
 
-            ctx.fillStyle = `rgba(255, 255, 255, ${labelAlpha * 0.85})`;
-            ctx.beginPath();
-            ctx.roundRect(n.x - textWidth / 2, pillY - pillH / 2, textWidth, pillH, 4);
-            ctx.fill();
-            ctx.strokeStyle = `rgba(226, 232, 240, ${labelAlpha * 0.6})`;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
+          // Pill border
+          ctx.strokeStyle = `rgba(226, 232, 240, ${lblAlpha * 0.5})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
 
-            ctx.fillStyle = `rgba(30, 41, 59, ${labelAlpha * 0.85})`;
-            ctx.fillText(n.label, n.x, pillY);
-          }
+          // Text
+          ctx.fillStyle = `rgba(30, 41, 59, ${lblAlpha * 0.9})`;
+          ctx.fillText(n.label, n.x, py + 0.5);
         }
       });
 
@@ -363,16 +340,13 @@ export default function KnowledgeGraph() {
 
     return () => {
       cancelAnimationFrame(animRef.current);
-      window.removeEventListener("resize", onResize);
-      canvas.removeEventListener("mousemove", onMouse);
+      window.removeEventListener("resize", handleResize);
+      canvas.removeEventListener("mousemove", handleMouse);
+      canvas.removeEventListener("mouseleave", handleLeave);
     };
-  }, [init]);
+  }, [setup]);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 w-full h-full"
-      style={{ cursor: "default" }}
-    />
+    <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" style={{ cursor: "default" }} />
   );
 }
