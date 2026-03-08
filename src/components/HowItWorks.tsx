@@ -1,7 +1,7 @@
 "use client";
 
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { PenTool, GitBranch, MessageSquare } from "lucide-react";
+import { PenTool, GitBranch, MessageSquare, ArrowRight } from "lucide-react";
 
 const steps = [
   {
@@ -31,56 +31,43 @@ export default function HowItWorks() {
   const { ref, visible } = useScrollReveal();
 
   return (
-    <section id="how-it-works" className="py-24 lg:py-32 border-t border-border">
+    <section id="how-it-works" className="py-24 lg:py-32 bg-navy text-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <p className="text-primary font-medium text-sm tracking-wide uppercase mb-3">
+        <p className="text-primary-light font-semibold text-sm tracking-wide uppercase mb-3">
           How It Works
         </p>
-        <h2 className="text-3xl lg:text-4xl font-bold text-white max-w-2xl">
+        <h2 className="text-3xl lg:text-4xl font-bold max-w-2xl">
           데이터가 통찰력으로 바뀌는 핵심 여정
         </h2>
 
-        <div
-          ref={ref}
-          className="mt-16 grid md:grid-cols-3 gap-8 lg:gap-12"
-        >
+        <div ref={ref} className="mt-16 grid md:grid-cols-3 gap-8 lg:gap-6">
           {steps.map((step, i) => (
-            <div
-              key={step.number}
-              className={`relative transition-all duration-700 ${
-                visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-              }`}
-              style={{ transitionDelay: `${i * 200}ms` }}
-            >
-              {/* Connector line */}
+            <div key={step.number} className="relative flex">
+              <div
+                className={`flex-1 p-8 rounded-2xl bg-white/[0.05] border border-white/[0.08] backdrop-blur-sm transition-all duration-700 ${
+                  visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+                }`}
+                style={{ transitionDelay: `${i * 200}ms` }}
+              >
+                {/* Step number */}
+                <span className="text-4xl font-black text-white/10">{step.number}</span>
+
+                {/* Icon */}
+                <div className="mt-4 w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center">
+                  <step.icon className="text-primary-light" size={22} />
+                </div>
+
+                <h3 className="mt-5 text-xl font-bold">{step.title}</h3>
+                <p className="text-primary-light text-sm font-medium mt-0.5">{step.titleKr}</p>
+                <p className="text-slate-400 text-sm leading-relaxed mt-3">{step.desc}</p>
+              </div>
+
+              {/* Arrow connector */}
               {i < steps.length - 1 && (
-                <div className="hidden md:block absolute top-10 left-[calc(50%+40px)] w-[calc(100%-40px)] h-px">
-                  <div
-                    className={`h-full bg-gradient-to-r from-primary/40 to-primary/10 transition-all duration-1000 ${
-                      visible ? "scale-x-100" : "scale-x-0"
-                    } origin-left`}
-                    style={{ transitionDelay: `${i * 200 + 400}ms` }}
-                  />
+                <div className="hidden md:flex items-center justify-center w-6 -mr-3 z-10">
+                  <ArrowRight className="text-white/20" size={20} />
                 </div>
               )}
-
-              <div className="text-center">
-                {/* Step number + icon */}
-                <div className="relative inline-flex items-center justify-center w-20 h-20 rounded-2xl border border-border bg-surface mb-6">
-                  <step.icon className="text-primary" size={28} />
-                  <span className="absolute -top-3 -right-3 w-7 h-7 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center">
-                    {step.number}
-                  </span>
-                </div>
-
-                <h3 className="text-lg font-bold text-white">{step.title}</h3>
-                <p className="text-sm text-primary-light font-medium mt-0.5">
-                  {step.titleKr}
-                </p>
-                <p className="text-text-muted text-sm leading-relaxed mt-3 max-w-xs mx-auto">
-                  {step.desc}
-                </p>
-              </div>
             </div>
           ))}
         </div>

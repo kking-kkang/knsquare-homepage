@@ -25,47 +25,41 @@ export default function WhyUs() {
   const { ref, visible } = useScrollReveal();
 
   return (
-    <section id="why-us" className="py-24 lg:py-32 border-t border-border">
+    <section id="why-us" className="py-24 lg:py-32">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left: heading */}
+          {/* Left */}
           <div>
-            <p className="text-primary font-medium text-sm tracking-wide uppercase mb-3">
+            <p className="text-primary font-semibold text-sm tracking-wide uppercase mb-3">
               Why Choose Us
             </p>
-            <h2 className="text-3xl lg:text-4xl font-bold text-white">
+            <h2 className="text-3xl lg:text-4xl font-bold text-navy leading-tight">
               기업용 AI의
               <br />
               새로운 기준을 제시합니다
             </h2>
-            <p className="mt-4 text-text-muted max-w-md leading-relaxed">
-              More Than a Chatbot — KNie는 단순한 챗봇이 아닌, 기업의 전략적 지식 기반(Strategic Knowledge Base)입니다.
+            <p className="mt-5 text-text-muted max-w-md leading-relaxed">
+              More Than a Chatbot — KNie는 단순한 챗봇이 아닌,
+              기업의 전략적 지식 기반(Strategic Knowledge Base)입니다.
             </p>
           </div>
 
-          {/* Right: cards */}
-          <div
-            ref={ref}
-            className="space-y-6"
-          >
+          {/* Right */}
+          <div ref={ref} className="space-y-5">
             {reasons.map((reason, i) => (
               <div
                 key={reason.title}
-                className={`flex gap-5 p-6 rounded-xl border border-border bg-surface/40 hover:border-primary/30 transition-all duration-700 ${
-                  visible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
+                className={`flex gap-5 p-6 rounded-2xl bg-white border border-border hover:shadow-lg hover:border-primary/20 transition-all duration-700 ${
+                  visible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
                 }`}
                 style={{ transitionDelay: `${i * 150}ms` }}
               >
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                <div className="w-12 h-12 rounded-xl bg-primary-50 flex items-center justify-center shrink-0">
                   <reason.icon className="text-primary" size={22} />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-white mb-1">
-                    {reason.title}
-                  </h3>
-                  <p className="text-text-muted text-sm leading-relaxed">
-                    {reason.desc}
-                  </p>
+                  <h3 className="text-lg font-bold text-navy mb-1">{reason.title}</h3>
+                  <p className="text-text-muted text-sm leading-relaxed">{reason.desc}</p>
                 </div>
               </div>
             ))}

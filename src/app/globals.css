@@ -1,15 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0A0F2C;
-  --foreground: #E2E8F0;
-  --primary: #3B82F6;
-  --primary-light: #60A5FA;
-  --primary-dark: #2563EB;
-  --surface: #111738;
-  --surface-light: #1A2147;
-  --border: #1E2A5A;
-  --text-muted: #94A3B8;
+  --background: #FFFFFF;
+  --foreground: #0F172A;
+  --primary: #2563EB;
+  --primary-light: #3B82F6;
+  --primary-dark: #1D4ED8;
+  --primary-50: #EFF6FF;
+  --primary-100: #DBEAFE;
+  --surface: #F8FAFC;
+  --surface-light: #F1F5F9;
+  --border: #E2E8F0;
+  --text-muted: #64748B;
+  --text-secondary: #475569;
+  --navy: #0F172A;
+  --navy-light: #1E293B;
 }
 
 @theme inline {
@@ -18,10 +23,15 @@
   --color-primary: var(--primary);
   --color-primary-light: var(--primary-light);
   --color-primary-dark: var(--primary-dark);
+  --color-primary-50: var(--primary-50);
+  --color-primary-100: var(--primary-100);
   --color-surface: var(--surface);
   --color-surface-light: var(--surface-light);
   --color-border: var(--border);
   --color-text-muted: var(--text-muted);
+  --color-text-secondary: var(--text-secondary);
+  --color-navy: var(--navy);
+  --color-navy-light: var(--navy-light);
   --font-sans: var(--font-inter);
   --font-korean: var(--font-noto-sans-kr);
 }
@@ -35,43 +45,29 @@ body {
   color: var(--foreground);
 }
 
-/* Scroll-triggered fade-in animation */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .animate-fade-in-up {
-  animation: fadeInUp 0.7s ease-out forwards;
+  animation: fadeInUp 0.8s ease-out forwards;
 }
 
-/* Knowledge graph node pulse */
-@keyframes pulse-glow {
-  0%, 100% {
-    filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.4));
-  }
-  50% {
-    filter: drop-shadow(0 0 12px rgba(59, 130, 246, 0.8));
-  }
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
 
-.animate-pulse-glow {
-  animation: pulse-glow 3s ease-in-out infinite;
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }
 
-/* Staggered fade-in for children */
 .stagger-children > * {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
-
 .stagger-children.visible > *:nth-child(1) { transition-delay: 0ms; opacity: 1; transform: translateY(0); }
 .stagger-children.visible > *:nth-child(2) { transition-delay: 150ms; opacity: 1; transform: translateY(0); }
 .stagger-children.visible > *:nth-child(3) { transition-delay: 300ms; opacity: 1; transform: translateY(0); }

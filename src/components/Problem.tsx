@@ -25,27 +25,26 @@ export default function Problem() {
   const { ref, visible } = useScrollReveal();
 
   return (
-    <section className="py-24 lg:py-32 border-t border-border">
+    <section className="py-24 lg:py-32 bg-surface">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div
-          ref={ref}
-          className={`stagger-children ${visible ? "visible" : ""}`}
-        >
-          <p className="text-primary font-medium text-sm tracking-wide uppercase mb-3">
+        <div ref={ref} className={`stagger-children ${visible ? "visible" : ""}`}>
+          <p className="text-primary font-semibold text-sm tracking-wide uppercase mb-3">
             The Challenge
           </p>
-          <h2 className="text-3xl lg:text-4xl font-bold text-white max-w-xl">
+          <h2 className="text-3xl lg:text-4xl font-bold text-navy max-w-xl">
             기업의 지식, 제대로 활용하고 계신가요?
           </h2>
 
-          <div className="mt-14 grid md:grid-cols-3 gap-8">
+          <div className="mt-14 grid md:grid-cols-3 gap-6">
             {problems.map((item) => (
               <div
                 key={item.title}
-                className="p-6 rounded-xl border border-border bg-surface/50 hover:bg-surface-light transition-colors"
+                className="p-7 rounded-2xl bg-white border border-border hover:shadow-lg hover:border-primary/20 transition-all"
               >
-                <item.icon className="text-primary mb-4" size={28} />
-                <h3 className="text-lg font-semibold text-white mb-2">
+                <div className="w-11 h-11 rounded-xl bg-primary-50 flex items-center justify-center mb-5">
+                  <item.icon className="text-primary" size={22} />
+                </div>
+                <h3 className="text-lg font-bold text-navy mb-2">
                   {item.title}
                 </h3>
                 <p className="text-text-muted text-sm leading-relaxed">
