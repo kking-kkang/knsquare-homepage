@@ -30,9 +30,9 @@ const cases = [
     industry: "자동차 부품",
     desc: "다각도 제품 이미지 분석 및 공정 데이터 기반 불량 예측 시스템을 개발했습니다.",
     metrics: [
-      { value: 99, suffix: "%", label: "불량 검출률 (최대)" },
+      { value: 99, suffix: "%", label: "불량 검출률 최대" },
       { value: 91, suffix: "%", label: "1시간 전 예측" },
-      { value: 115100, suffix: "+", label: "학습 데이터 건수" },
+      { value: 115100, suffix: "", label: "학습 데이터" },
     ],
     results: ["다공장 불량 분류", "공정조건 기반 예측적 불량 분석"],
   },
@@ -52,20 +52,20 @@ const cases = [
     industry: "공공 데이터",
     desc: "소방 서비스 최적화, 보행자 밀집도 예측, 스쿨존 지정 등 공공 프로젝트를 자문했습니다.",
     metrics: [],
-    results: ["소방차 출동경로 최적화", "도로 안전 취약지 분석", "교통사고 위험도 기반 스쿨존 지정"],
+    results: ["소방차 출동경로 최적화", "도로 안전 취약지 분석", "스쿨존 지정"],
   },
 ];
 
 export default function Portfolio() {
   return (
-    <section id="portfolio" className="py-24 lg:py-32 bg-white">
+    <section id="portfolio" className="py-20 lg:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <AnimatedSection>
-          <p className="text-primary font-semibold text-sm tracking-wide uppercase mb-3">Portfolio</p>
-          <h2 className="text-3xl lg:text-4xl font-extrabold text-navy">
+          <p className="text-primary font-semibold text-[13px] tracking-wide uppercase mb-2">Portfolio</p>
+          <h2 className="text-[1.75rem] lg:text-[2.1rem] font-bold text-navy leading-tight">
             실제 성과로 증명합니다
           </h2>
-          <p className="mt-4 text-text-muted max-w-2xl text-lg">
+          <p className="mt-3 text-text-muted text-[15px] max-w-xl">
             제조, 공공, 화학 등 다양한 산업에서 AI 솔루션을 성공적으로 적용했습니다.
           </p>
         </AnimatedSection>
@@ -75,55 +75,44 @@ export default function Portfolio() {
           whileInView="visible"
           viewport={{ once: true, margin: "-60px" }}
           variants={staggerContainer}
-          className="mt-16 grid lg:grid-cols-2 gap-6"
+          className="mt-12 grid lg:grid-cols-2 gap-5"
         >
           {cases.map((c) => (
-            <motion.div
-              key={c.client}
-              variants={fadeInUp}
-              transition={{ duration: 0.5 }}
-              className="card-hover"
-            >
-              <div className="h-full p-7 lg:p-8 rounded-2xl border border-border bg-white">
-                {/* Header */}
-                <div className="flex items-start justify-between gap-4 mb-5">
+            <motion.div key={c.client} variants={fadeInUp} transition={{ duration: 0.5 }} className="card-hover">
+              <div className="h-full p-6 lg:p-7 rounded-xl border border-border bg-white">
+                <div className="flex items-start justify-between gap-3 mb-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-11 h-11 rounded-xl bg-navy flex items-center justify-center">
-                      <c.icon size={20} className="text-white" />
+                    <div className="w-10 h-10 rounded-lg bg-navy flex items-center justify-center shrink-0">
+                      <c.icon size={18} className="text-white" />
                     </div>
                     <div>
-                      <h3 className="text-lg font-bold text-navy">{c.client}</h3>
-                      <p className="text-xs text-text-muted">{c.industry}</p>
+                      <h3 className="text-[15px] font-bold text-navy">{c.client}</h3>
+                      <p className="text-[11px] text-text-muted">{c.industry}</p>
                     </div>
                   </div>
-                  <span className="px-3 py-1 rounded-full bg-primary-50 text-primary text-xs font-semibold shrink-0">
+                  <span className="px-2.5 py-0.5 rounded-full bg-primary-50 text-primary text-[11px] font-semibold shrink-0">
                     {c.badge}
                   </span>
                 </div>
 
-                <p className="text-sm text-text-secondary leading-relaxed mb-5">{c.desc}</p>
+                <p className="text-[13px] text-text-secondary leading-[1.6] mb-4">{c.desc}</p>
 
-                {/* Metrics */}
                 {c.metrics.length > 0 && (
-                  <div className="flex gap-6 mb-5 pb-5 border-b border-border">
+                  <div className="flex gap-5 mb-4 pb-4 border-b border-border">
                     {c.metrics.map((m) => (
                       <div key={m.label}>
-                        <div className="text-2xl font-extrabold text-navy">
+                        <div className="text-[1.25rem] font-bold text-navy">
                           <AnimatedCounter value={m.value} suffix={m.suffix} />
                         </div>
-                        <div className="text-[11px] text-text-muted mt-0.5">{m.label}</div>
+                        <div className="text-[10px] text-text-muted mt-0.5">{m.label}</div>
                       </div>
                     ))}
                   </div>
                 )}
 
-                {/* Results */}
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1.5">
                   {c.results.map((r) => (
-                    <span
-                      key={r}
-                      className="px-3 py-1.5 rounded-lg bg-surface text-xs font-medium text-text-secondary"
-                    >
+                    <span key={r} className="px-2.5 py-1 rounded-md bg-surface text-[11px] font-medium text-text-secondary">
                       {r}
                     </span>
                   ))}

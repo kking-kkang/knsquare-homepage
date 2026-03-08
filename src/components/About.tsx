@@ -60,39 +60,38 @@ const milestones: { year: string; items: string[]; highlight?: boolean }[] = [
 
 export default function About() {
   return (
-    <section id="about" className="py-24 lg:py-32 bg-white relative">
+    <section id="about" className="py-20 lg:py-28 bg-white relative">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section header */}
         <AnimatedSection>
-          <div className="text-center max-w-2xl mx-auto mb-20">
-            <p className="text-primary font-semibold text-sm tracking-wide uppercase mb-3">About Us</p>
-            <h2 className="text-3xl lg:text-4xl font-extrabold text-navy">
+          <div className="text-center max-w-xl mx-auto mb-16">
+            <p className="text-primary font-semibold text-[13px] tracking-wide uppercase mb-2">About Us</p>
+            <h2 className="text-[1.75rem] lg:text-[2.1rem] font-bold text-navy leading-tight">
               AI 기술로 산업을 혁신합니다
             </h2>
           </div>
         </AnimatedSection>
 
         {/* CEO + Company intro */}
-        <div className="grid lg:grid-cols-5 gap-12 items-start mb-20">
+        <div className="grid lg:grid-cols-5 gap-10 items-start mb-16">
           <AnimatedSection className="lg:col-span-2">
-            <div className="p-8 rounded-3xl bg-surface border border-border">
-              {/* CEO placeholder */}
-              <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-navy to-navy-light flex items-center justify-center mb-6">
-                <GraduationCap size={36} className="text-white" />
+            <div className="p-6 rounded-2xl bg-surface border border-border">
+              <div className="w-20 h-20 rounded-xl bg-gradient-to-br from-navy to-navy-light flex items-center justify-center mb-5">
+                <GraduationCap size={30} className="text-white" />
               </div>
-              <h3 className="text-xl font-extrabold text-navy">이강배 박사</h3>
-              <p className="text-sm text-primary font-semibold mt-1">CEO / Lead Consultant</p>
-              <div className="mt-4 space-y-2 text-sm text-text-secondary leading-relaxed">
+              <h3 className="text-[17px] font-bold text-navy">이강배 박사</h3>
+              <p className="text-[12px] text-primary font-semibold mt-0.5">CEO / Lead Consultant</p>
+              <div className="mt-3 space-y-1.5 text-[13px] text-text-secondary leading-[1.6]">
                 <p>동아대학교 경영정보학과 정교수</p>
                 <p>고려대학교 산업공학 학사</p>
                 <p>KAIST 산업공학 석·박사</p>
               </div>
-              <div className="mt-5 pt-5 border-t border-border">
-                <div className="flex items-center gap-2 text-sm text-text-muted">
-                  <Briefcase size={14} />
+              <div className="mt-4 pt-4 border-t border-border">
+                <div className="flex items-center gap-2 text-[13px] text-text-muted">
+                  <Briefcase size={13} />
                   <span className="font-medium">25년+ AI 컨설팅 경력</span>
                 </div>
-                <p className="text-xs text-text-muted mt-2">
+                <p className="text-[11px] text-text-muted mt-1.5">
                   물류, 패션, 화학, 국방, 통신 등 다양한 산업에서 AI 컨설팅 수행
                 </p>
               </div>

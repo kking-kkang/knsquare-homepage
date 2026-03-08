@@ -6,7 +6,7 @@ import {
   staggerContainerSlow,
   fadeInRight,
 } from "@/lib/motion";
-import { Database, ShieldCheck, RefreshCw, ArrowUpRight } from "lucide-react";
+import { Database, ShieldCheck, RefreshCw } from "lucide-react";
 
 const reasons = [
   {
@@ -34,59 +34,46 @@ const reasons = [
 
 export default function WhyUs() {
   return (
-    <section id="why-us" className="py-24 lg:py-32 bg-surface relative overflow-hidden">
-      <div className="absolute inset-0 bg-dots opacity-50" />
+    <section id="why-us" className="py-20 lg:py-28 bg-surface relative overflow-hidden">
+      <div className="absolute inset-0 bg-dots opacity-40" />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left */}
+        <div className="grid lg:grid-cols-2 gap-14 items-center">
           <AnimatedSection>
-            <p className="text-primary font-semibold text-sm tracking-wide uppercase mb-3">Why Choose Us</p>
-            <h2 className="text-3xl lg:text-4xl font-extrabold text-navy leading-tight">
-              기업용 AI의
-              <br />
-              새로운 기준을 제시합니다
+            <p className="text-primary font-semibold text-[13px] tracking-wide uppercase mb-2">Why Choose Us</p>
+            <h2 className="text-[1.75rem] lg:text-[2.1rem] font-bold text-navy leading-tight">
+              기업용 AI의<br />새로운 기준을 제시합니다
             </h2>
-            <p className="mt-5 text-text-muted max-w-md leading-relaxed text-lg">
+            <p className="mt-4 text-text-muted max-w-md text-[15px] leading-[1.7]">
               More Than a Chatbot — KNie는 단순한 챗봇이 아닌, 기업의 전략적 지식 기반입니다.
             </p>
-
-            <div className="mt-8 flex items-center gap-6">
-              <a
-                href="#contact"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-navy text-white font-semibold hover:bg-navy-light transition-colors"
-              >
-                도입 문의
-                <ArrowUpRight size={16} />
-              </a>
-            </div>
+            <a
+              href="mailto:kblee@knsquare.net"
+              className="inline-flex items-center gap-2 mt-6 px-5 py-2.5 rounded-lg bg-navy text-white text-[13px] font-medium hover:bg-navy-light transition-colors"
+            >
+              도입 문의
+            </a>
           </AnimatedSection>
 
-          {/* Right */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-60px" }}
             variants={staggerContainerSlow}
-            className="space-y-5"
+            className="space-y-4"
           >
             {reasons.map((reason) => (
-              <motion.div
-                key={reason.title}
-                variants={fadeInRight}
-                transition={{ duration: 0.5 }}
-                className="card-hover"
-              >
-                <div className="flex gap-5 p-6 rounded-2xl bg-white border border-border">
-                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${reason.color} flex items-center justify-center shrink-0 shadow-sm`}>
-                    <reason.icon size={22} className="text-white" />
+              <motion.div key={reason.title} variants={fadeInRight} transition={{ duration: 0.5 }} className="card-hover">
+                <div className="flex gap-4 p-5 rounded-xl bg-white border border-border">
+                  <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${reason.color} flex items-center justify-center shrink-0`}>
+                    <reason.icon size={18} className="text-white" />
                   </div>
                   <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-[11px] font-bold text-text-muted">{reason.number}</span>
-                      <h3 className="text-lg font-bold text-navy">{reason.title}</h3>
+                    <div className="flex items-center gap-2 mb-0.5">
+                      <span className="text-[10px] font-bold text-text-muted">{reason.number}</span>
+                      <h3 className="text-[15px] font-bold text-navy">{reason.title}</h3>
                     </div>
-                    <p className="text-text-muted text-sm leading-relaxed">{reason.desc}</p>
+                    <p className="text-[13px] text-text-muted leading-[1.6]">{reason.desc}</p>
                   </div>
                 </div>
               </motion.div>

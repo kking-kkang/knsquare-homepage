@@ -19,6 +19,7 @@ import {
   FileType,
   ArrowRight,
 } from "lucide-react";
+import Link from "next/link";
 
 const products = [
   {
@@ -31,6 +32,7 @@ const products = [
     icon: Network,
     gradient: "from-blue-600 to-indigo-600",
     bgGradient: "from-blue-50 to-indigo-50",
+    href: "/solutions/kraph",
     features: [
       { icon: Layers, title: "온톨로지 설계", desc: "도메인 맞춤 개념과 관계를 정의해 의미 있는 지식 구조를 설계" },
       { icon: FileSearch, title: "자동 추출", desc: "문서에서 엔터티와 관계를 자동 추출하여 구축 시간 단축" },
@@ -44,10 +46,11 @@ const products = [
     tagline: "Hybrid RAG-Based AI Chatbot",
     badge: "3rd Gen Chatbot",
     description:
-      "More Than a Chatbot — Graph-RAG로 구동되는 3세대 챗봇이자 전략적 지식 베이스입니다. 벡터 검색과 지식그래프 의미 검색을 통합해 환각 없는 정확한 답변을 제공합니다.",
+      "Graph-RAG로 구동되는 3세대 챗봇이자 전략적 지식 베이스입니다. 벡터 검색과 지식그래프 의미 검색을 통합해 환각 없는 정확한 답변을 제공합니다.",
     icon: MessageSquareText,
     gradient: "from-cyan-500 to-blue-600",
     bgGradient: "from-cyan-50 to-blue-50",
+    href: "/solutions/knie",
     features: [
       { icon: Zap, title: "즉각적인 해답", desc: "비정형 문서 기반 정확한 응답을 실시간 제시" },
       { icon: Quote, title: "출처 기반 근거", desc: "내부 규정 인용 및 100% 출처 표기로 신뢰도 확보" },
@@ -59,14 +62,14 @@ const products = [
 
 export default function Products() {
   return (
-    <section id="products" className="py-24 lg:py-32 bg-white">
+    <section id="products" className="py-20 lg:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <AnimatedSection>
-          <p className="text-primary font-semibold text-sm tracking-wide uppercase mb-3">Solutions</p>
-          <h2 className="text-3xl lg:text-4xl font-extrabold text-navy">
+          <p className="text-primary font-semibold text-[13px] tracking-wide uppercase mb-2">Solutions</p>
+          <h2 className="text-[1.75rem] lg:text-[2.1rem] font-bold text-navy leading-tight">
             비정형 문서를 지식으로, 지식을 인사이트로
           </h2>
-          <p className="mt-4 text-text-muted max-w-2xl text-lg">
+          <p className="mt-3 text-text-muted text-[15px] max-w-xl">
             두 가지 핵심 솔루션으로 기업의 지식 관리를 혁신합니다.
           </p>
         </AnimatedSection>
@@ -76,42 +79,45 @@ export default function Products() {
           whileInView="visible"
           viewport={{ once: true, margin: "-60px" }}
           variants={staggerContainer}
-          className="mt-16 space-y-8"
+          className="mt-12 space-y-6"
         >
           {products.map((product) => (
             <motion.div key={product.id} variants={fadeInUp} transition={{ duration: 0.6 }}>
-              <div className="group rounded-3xl border border-border bg-white overflow-hidden hover:shadow-2xl hover:border-primary/20 transition-all duration-500">
+              <div className="group rounded-2xl border border-border bg-white overflow-hidden hover:shadow-xl hover:border-primary/15 transition-all duration-400">
                 <div className="grid lg:grid-cols-5 gap-0">
-                  {/* Left: Product info */}
-                  <div className="lg:col-span-2 p-8 lg:p-10 flex flex-col justify-center">
-                    <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r ${product.bgGradient} w-fit mb-5`}>
-                      <product.icon size={14} className="text-primary" />
-                      <span className="text-xs font-semibold text-primary">{product.badge}</span>
+                  {/* Left */}
+                  <div className="lg:col-span-2 p-7 lg:p-9 flex flex-col justify-center">
+                    <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-gradient-to-r ${product.bgGradient} w-fit mb-4`}>
+                      <product.icon size={12} className="text-primary" />
+                      <span className="text-[11px] font-semibold text-primary">{product.badge}</span>
                     </div>
 
-                    <h3 className="text-3xl font-extrabold text-navy mb-1">{product.name}</h3>
-                    <p className="text-sm text-text-muted font-medium mb-4">{product.tagline}</p>
-                    <p className="text-text-secondary leading-relaxed">{product.description}</p>
+                    <h3 className="text-[1.5rem] font-bold text-navy mb-0.5">{product.name}</h3>
+                    <p className="text-[12px] text-text-muted mb-3">{product.tagline}</p>
+                    <p className="text-[14px] text-text-secondary leading-[1.7]">{product.description}</p>
 
-                    <a href="#contact" className="inline-flex items-center gap-1.5 mt-6 text-sm font-semibold text-primary hover:gap-2.5 transition-all">
-                      자세히 알아보기 <ArrowRight size={15} />
-                    </a>
+                    <Link
+                      href={product.href}
+                      className="inline-flex items-center gap-1.5 mt-5 text-[13px] font-semibold text-primary hover:gap-2.5 transition-all"
+                    >
+                      자세히 알아보기 <ArrowRight size={14} />
+                    </Link>
                   </div>
 
-                  {/* Right: Features grid */}
+                  {/* Right */}
                   <div className="lg:col-span-3 grid sm:grid-cols-2 border-t lg:border-t-0 lg:border-l border-border">
                     {product.features.map((feat, i) => (
                       <div
                         key={feat.title}
-                        className={`p-6 lg:p-7 hover:bg-surface transition-colors ${
+                        className={`p-5 lg:p-6 hover:bg-surface/60 transition-colors ${
                           i < 2 ? "border-b border-border" : ""
                         } ${i % 2 === 0 ? "sm:border-r border-border" : ""}`}
                       >
-                        <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${product.bgGradient} flex items-center justify-center mb-4`}>
-                          <feat.icon size={18} className="text-primary" />
+                        <div className={`w-9 h-9 rounded-lg bg-gradient-to-br ${product.bgGradient} flex items-center justify-center mb-3`}>
+                          <feat.icon size={16} className="text-primary" />
                         </div>
-                        <h4 className="text-[15px] font-bold text-navy mb-1.5">{feat.title}</h4>
-                        <p className="text-sm text-text-muted leading-relaxed">{feat.desc}</p>
+                        <h4 className="text-[13px] font-bold text-navy mb-1">{feat.title}</h4>
+                        <p className="text-[12px] text-text-muted leading-[1.6]">{feat.desc}</p>
                       </div>
                     ))}
                   </div>
