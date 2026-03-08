@@ -61,11 +61,11 @@ export default function Portfolio() {
     <section id="portfolio" className="py-20 lg:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <AnimatedSection>
-          <p className="text-primary font-semibold text-[13px] tracking-wide uppercase mb-2">Portfolio</p>
-          <h2 className="text-[1.75rem] lg:text-[2.1rem] font-bold text-navy leading-tight">
+          <p className="text-primary font-semibold text-sm tracking-wide uppercase mb-2">Portfolio</p>
+          <h2 className="text-[2rem] lg:text-[2.5rem] font-bold text-navy leading-tight">
             실제 성과로 증명합니다
           </h2>
-          <p className="mt-3 text-text-muted text-[15px] max-w-xl">
+          <p className="mt-3 text-text-muted text-base max-w-xl">
             제조, 공공, 화학 등 다양한 산업에서 AI 솔루션을 성공적으로 적용했습니다.
           </p>
         </AnimatedSection>
@@ -86,25 +86,25 @@ export default function Portfolio() {
                       <c.icon size={18} className="text-white" />
                     </div>
                     <div>
-                      <h3 className="text-[15px] font-bold text-navy">{c.client}</h3>
-                      <p className="text-[11px] text-text-muted">{c.industry}</p>
+                      <h3 className="text-base font-bold text-navy">{c.client}</h3>
+                      <p className="text-xs text-text-muted">{c.industry}</p>
                     </div>
                   </div>
-                  <span className="px-2.5 py-0.5 rounded-full bg-primary-50 text-primary text-[11px] font-semibold shrink-0">
+                  <span className="px-2.5 py-0.5 rounded-full bg-primary-50 text-primary text-xs font-semibold shrink-0">
                     {c.badge}
                   </span>
                 </div>
 
-                <p className="text-[13px] text-text-secondary leading-[1.6] mb-4">{c.desc}</p>
+                <p className="text-sm text-text-secondary leading-[1.6] mb-4">{c.desc}</p>
 
                 {c.metrics.length > 0 && (
                   <div className="flex gap-5 mb-4 pb-4 border-b border-border">
                     {c.metrics.map((m) => (
                       <div key={m.label}>
-                        <div className="text-[1.25rem] font-bold text-navy">
+                        <div className="text-[1.5rem] font-bold text-navy">
                           <AnimatedCounter value={m.value} suffix={m.suffix} />
                         </div>
-                        <div className="text-[10px] text-text-muted mt-0.5">{m.label}</div>
+                        <div className="text-[11px] text-text-muted mt-0.5">{m.label}</div>
                       </div>
                     ))}
                   </div>
@@ -112,7 +112,7 @@ export default function Portfolio() {
 
                 <div className="flex flex-wrap gap-1.5">
                   {c.results.map((r) => (
-                    <span key={r} className="px-2.5 py-1 rounded-md bg-surface text-[11px] font-medium text-text-secondary">
+                    <span key={r} className="px-2.5 py-1 rounded-md bg-surface text-xs font-medium text-text-secondary">
                       {r}
                     </span>
                   ))}

@@ -74,11 +74,11 @@ export default function Services() {
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
         <AnimatedSection>
           <div className="text-center max-w-xl mx-auto">
-            <p className="text-primary font-semibold text-[13px] tracking-wide uppercase mb-2">Services</p>
-            <h2 className="text-[1.75rem] lg:text-[2.1rem] font-bold text-navy leading-tight">
+            <p className="text-primary font-semibold text-sm tracking-wide uppercase mb-2">Services</p>
+            <h2 className="text-[2rem] lg:text-[2.5rem] font-bold text-navy leading-tight">
               다양한 산업에 적용 가능한 AI 서비스
             </h2>
-            <p className="mt-3 text-text-muted text-[15px]">
+            <p className="mt-3 text-text-muted text-base">
               AI 모델 개발부터 전략 컨설팅, 교육까지 엔드투엔드 서비스를 제공합니다.
             </p>
           </div>
@@ -102,9 +102,9 @@ export default function Services() {
                 <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${svc.bgColor} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
                   <svc.icon size={18} className="text-primary" />
                 </div>
-                <h3 className="text-[14px] font-bold text-navy">{svc.title}</h3>
-                <p className="text-[11px] text-text-muted mt-0.5 mb-2">{svc.titleKr}</p>
-                <p className="text-[13px] text-text-secondary leading-[1.6]">{svc.desc}</p>
+                <h3 className="text-[15px] font-bold text-navy">{svc.title}</h3>
+                <p className="text-xs text-text-muted mt-0.5 mb-2">{svc.titleKr}</p>
+                <p className="text-sm text-text-secondary leading-[1.6]">{svc.desc}</p>
               </div>
             </motion.div>
           ))}

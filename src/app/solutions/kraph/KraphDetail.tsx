@@ -66,7 +66,7 @@ export default function KraphDetail() {
         <div className="max-w-5xl mx-auto px-6 lg:px-8 pt-28 pb-16">
           <Link
             href="/#products"
-            className="inline-flex items-center gap-1.5 text-[13px] text-slate-400 hover:text-white transition-colors mb-8"
+            className="inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-white transition-colors mb-8"
           >
             <ArrowLeft size={14} /> 홈으로 돌아가기
           </Link>
@@ -74,11 +74,11 @@ export default function KraphDetail() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 mb-5">
               <Network size={14} className="text-blue-400" />
-              <span className="text-[12px] font-medium text-blue-300">Knowledge Graph</span>
+              <span className="text-[13px] font-medium text-blue-300">Knowledge Graph</span>
             </div>
             <h1 className="text-[2rem] lg:text-[2.5rem] font-bold leading-tight">Kraph</h1>
-            <p className="text-[14px] text-slate-400 mt-1 mb-4">Ontology-Powered Knowledge Graph Automation</p>
-            <p className="text-[15px] text-slate-300 max-w-2xl leading-[1.7]">
+            <p className="text-[15px] text-slate-400 mt-1 mb-4">Ontology-Powered Knowledge Graph Automation</p>
+            <p className="text-base text-slate-300 max-w-2xl leading-[1.7]">
               방대한 문서를 온톨로지에 기반해 자동으로 지식그래프로 전환하는 솔루션입니다.
               구축된 온톨로지와 지식그래프는 기업 내 숨겨진 지식을 연결하고 통합하여,
               지능형 의사결정 지원 시스템 및 생성형 AI 기반 응답 시스템의 인프라로 활용됩니다.
@@ -89,7 +89,7 @@ export default function KraphDetail() {
 
       {/* Input formats */}
       <div className="max-w-5xl mx-auto px-6 lg:px-8 py-16">
-        <h2 className="text-[1.25rem] font-bold text-navy mb-6">지원 문서 형식</h2>
+        <h2 className="text-[1.5rem] font-bold text-navy mb-6">지원 문서 형식</h2>
         <div className="grid grid-cols-3 sm:grid-cols-6 gap-3">
           {[
             { ext: "PDF", desc: "보고서, 공문, 법률문서", color: "bg-red-50 text-red-600 border-red-100" },
@@ -100,8 +100,8 @@ export default function KraphDetail() {
             { ext: "JSON", desc: "API 데이터", color: "bg-cyan-50 text-cyan-600 border-cyan-100" },
           ].map((f) => (
             <div key={f.ext} className={`p-3 rounded-xl border text-center ${f.color}`}>
-              <div className="text-[14px] font-bold">{f.ext}</div>
-              <div className="text-[10px] mt-0.5 opacity-70">{f.desc}</div>
+              <div className="text-[15px] font-bold">{f.ext}</div>
+              <div className="text-[11px] mt-0.5 opacity-70">{f.desc}</div>
             </div>
           ))}
         </div>
@@ -110,8 +110,8 @@ export default function KraphDetail() {
       {/* Process steps */}
       <div className="bg-surface">
         <div className="max-w-5xl mx-auto px-6 lg:px-8 py-16">
-          <h2 className="text-[1.25rem] font-bold text-navy mb-2">작동 프로세스</h2>
-          <p className="text-[14px] text-text-muted mb-10">4단계를 거쳐 문서가 지식그래프로 전환됩니다.</p>
+          <h2 className="text-[1.5rem] font-bold text-navy mb-2">작동 프로세스</h2>
+          <p className="text-[15px] text-text-muted mb-10">4단계를 거쳐 문서가 지식그래프로 전환됩니다.</p>
 
           <div className="space-y-6">
             {steps.map((step, i) => (
@@ -128,12 +128,12 @@ export default function KraphDetail() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-baseline gap-2 mb-1">
-                    <span className="text-[11px] font-bold text-text-muted">{step.number}</span>
-                    <h3 className="text-[15px] font-bold text-navy">{step.title}</h3>
-                    <span className="text-[12px] text-text-muted">{step.titleKr}</span>
+                    <span className="text-xs font-bold text-text-muted">{step.number}</span>
+                    <h3 className="text-base font-bold text-navy">{step.title}</h3>
+                    <span className="text-[13px] text-text-muted">{step.titleKr}</span>
                   </div>
-                  <p className="text-[13px] text-text-secondary leading-[1.7]">{step.desc}</p>
-                  <p className="text-[12px] text-text-muted leading-[1.7] mt-2 p-3 rounded-lg bg-surface border border-border-light">
+                  <p className="text-sm text-text-secondary leading-[1.7]">{step.desc}</p>
+                  <p className="text-[13px] text-text-muted leading-[1.7] mt-2 p-3 rounded-lg bg-surface border border-border-light">
                     {step.detail}
                   </p>
                 </div>
@@ -145,14 +145,14 @@ export default function KraphDetail() {
 
       {/* Use cases */}
       <div className="max-w-5xl mx-auto px-6 lg:px-8 py-16">
-        <h2 className="text-[1.25rem] font-bold text-navy mb-2">활용 사례</h2>
-        <p className="text-[14px] text-text-muted mb-8">다양한 기업 환경에서 Kraph를 활용할 수 있습니다.</p>
+        <h2 className="text-[1.5rem] font-bold text-navy mb-2">활용 사례</h2>
+        <p className="text-[15px] text-text-muted mb-8">다양한 기업 환경에서 Kraph를 활용할 수 있습니다.</p>
         <div className="grid sm:grid-cols-2 gap-4">
           {useCases.map((uc) => (
             <div key={uc.title} className="p-5 rounded-xl border border-border hover:shadow-md transition-shadow">
               <uc.icon size={20} className="text-primary mb-3" />
-              <h3 className="text-[14px] font-bold text-navy mb-1">{uc.title}</h3>
-              <p className="text-[13px] text-text-muted leading-[1.6]">{uc.desc}</p>
+              <h3 className="text-[15px] font-bold text-navy mb-1">{uc.title}</h3>
+              <p className="text-sm text-text-muted leading-[1.6]">{uc.desc}</p>
             </div>
           ))}
         </div>
@@ -161,18 +161,18 @@ export default function KraphDetail() {
       {/* CTA */}
       <div className="bg-navy text-white">
         <div className="max-w-5xl mx-auto px-6 lg:px-8 py-14 text-center">
-          <h2 className="text-[1.25rem] font-bold mb-3">Kraph 도입을 검토하고 계신가요?</h2>
-          <p className="text-[14px] text-slate-400 mb-6">귀사의 문서 환경에 맞는 맞춤 제안을 드립니다.</p>
+          <h2 className="text-[1.5rem] font-bold mb-3">Kraph 도입을 검토하고 계신가요?</h2>
+          <p className="text-[15px] text-slate-400 mb-6">귀사의 문서 환경에 맞는 맞춤 제안을 드립니다.</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a
               href="mailto:kblee@knsquare.net"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-white text-navy text-[14px] font-semibold hover:bg-slate-100 transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-white text-navy text-[15px] font-semibold hover:bg-slate-100 transition-colors"
             >
               문의하기 <ArrowRight size={15} />
             </a>
             <Link
               href="/solutions/knie"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border border-white/20 text-white text-[14px] font-medium hover:bg-white/10 transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border border-white/20 text-white text-[15px] font-medium hover:bg-white/10 transition-colors"
             >
               KNie도 알아보기
             </Link>

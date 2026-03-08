@@ -53,14 +53,14 @@ export default function Header() {
               <a
                 key={item.href}
                 href={item.href}
-                className="text-[13px] font-medium text-text-secondary hover:text-primary transition-colors"
+                className="text-sm font-medium text-text-secondary hover:text-primary transition-colors"
               >
                 {item.label}
               </a>
             ))}
             <a
               href="#contact"
-              className="ml-3 px-5 py-2.5 text-[13px] font-semibold rounded-lg bg-navy text-white hover:bg-navy-light transition-colors"
+              className="ml-3 px-5 py-2.5 text-sm font-semibold rounded-lg bg-navy text-white hover:bg-navy-light transition-colors"
             >
               도입 문의
             </a>

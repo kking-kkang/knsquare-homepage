@@ -44,11 +44,11 @@ export default function HowItWorks() {
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
         <AnimatedSection>
           <div className="text-center max-w-xl mx-auto">
-            <p className="text-primary-light font-semibold text-[13px] tracking-wide uppercase mb-2">How It Works</p>
-            <h2 className="text-[1.75rem] lg:text-[2.1rem] font-bold leading-tight">
+            <p className="text-primary-light font-semibold text-sm tracking-wide uppercase mb-2">How It Works</p>
+            <h2 className="text-[2rem] lg:text-[2.5rem] font-bold leading-tight">
               데이터가 통찰력으로 바뀌는 핵심 여정
             </h2>
-            <p className="mt-3 text-slate-400 text-[15px]">
+            <p className="mt-3 text-slate-400 text-base">
               3단계 프로세스로 비정형 데이터를 실행 가능한 인사이트로 전환합니다.
             </p>
           </div>
@@ -73,8 +73,8 @@ export default function HowItWorks() {
                 </div>
 
                 <h3 className="text-[16px] font-bold">{step.title}</h3>
-                <p className="text-primary-light text-[12px] font-medium mt-0.5">{step.titleKr}</p>
-                <p className="text-slate-400 text-[13px] leading-[1.6] mt-3">{step.desc}</p>
+                <p className="text-primary-light text-[13px] font-medium mt-0.5">{step.titleKr}</p>
+                <p className="text-slate-400 text-sm leading-[1.6] mt-3">{step.desc}</p>
               </div>
 
               {i < steps.length - 1 && (

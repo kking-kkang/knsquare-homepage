@@ -30,7 +30,7 @@ export default function Hero() {
               className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50/90 backdrop-blur-sm border border-amber-200/60 mb-5 hover:bg-amber-100/80 transition-colors cursor-pointer"
             >
               <Trophy size={13} className="text-amber-500 shrink-0" />
-              <span className="text-[12px] font-medium text-amber-700">
+              <span className="text-[13px] font-medium text-amber-700">
                 2026 K-ICT 대상 수상
               </span>
               <ExternalLink size={11} className="text-amber-400" />
@@ -54,7 +54,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.55 }}
-              className="mt-5 text-[15px] sm:text-base text-text-secondary max-w-md leading-[1.7]"
+              className="mt-5 text-base sm:text-base text-text-secondary max-w-md leading-[1.7]"
             >
               방대한 비정형 문서를 체계적 지식으로 전환하여,
               정확하고 신뢰할 수 있는 인사이트를 제공합니다.
@@ -69,14 +69,14 @@ export default function Hero() {
             >
               <a
                 href="#products"
-                className="group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-navy text-white text-[14px] font-medium hover:bg-navy-light transition-all shadow-md shadow-navy/15"
+                className="group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-navy text-white text-[15px] font-medium hover:bg-navy-light transition-all shadow-md shadow-navy/15"
               >
                 솔루션 알아보기
                 <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
               </a>
               <a
                 href="mailto:kblee@knsquare.net"
-                className="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-border bg-white/80 backdrop-blur-sm text-navy text-[14px] font-medium hover:bg-surface transition-all"
+                className="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-border bg-white/80 backdrop-blur-sm text-navy text-[15px] font-medium hover:bg-surface transition-all"
               >
                 도입 문의
               </a>
@@ -96,8 +96,8 @@ export default function Hero() {
                 { value: "13편", label: "학술 논문" },
               ].map((s) => (
                 <div key={s.label}>
-                  <div className="text-[13px] font-bold text-navy">{s.value}</div>
-                  <div className="text-[11px] text-text-muted">{s.label}</div>
+                  <div className="text-sm font-bold text-navy">{s.value}</div>
+                  <div className="text-xs text-text-muted">{s.label}</div>
                 </div>
               ))}
             </motion.div>
@@ -112,7 +112,7 @@ export default function Hero() {
         className="relative z-10 flex justify-center pb-8"
       >
         <a href="#products" className="flex flex-col items-center gap-1 text-text-muted hover:text-primary transition-colors">
-          <span className="text-[10px] font-medium tracking-widest uppercase">Scroll</span>
+          <span className="text-[11px] font-medium tracking-widest uppercase">Scroll</span>
           <ChevronDown size={14} className="animate-bounce" />
         </a>
       </motion.div>

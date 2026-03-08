@@ -65,8 +65,8 @@ export default function About() {
         {/* Section header */}
         <AnimatedSection>
           <div className="text-center max-w-xl mx-auto mb-16">
-            <p className="text-primary font-semibold text-[13px] tracking-wide uppercase mb-2">About Us</p>
-            <h2 className="text-[1.75rem] lg:text-[2.1rem] font-bold text-navy leading-tight">
+            <p className="text-primary font-semibold text-sm tracking-wide uppercase mb-2">About Us</p>
+            <h2 className="text-[2rem] lg:text-[2.5rem] font-bold text-navy leading-tight">
               AI 기술로 산업을 혁신합니다
             </h2>
           </div>
@@ -80,18 +80,18 @@ export default function About() {
                 <GraduationCap size={30} className="text-white" />
               </div>
               <h3 className="text-[17px] font-bold text-navy">이강배 박사</h3>
-              <p className="text-[12px] text-primary font-semibold mt-0.5">CEO / Lead Consultant</p>
-              <div className="mt-3 space-y-1.5 text-[13px] text-text-secondary leading-[1.6]">
+              <p className="text-[13px] text-primary font-semibold mt-0.5">CEO / Lead Consultant</p>
+              <div className="mt-3 space-y-1.5 text-sm text-text-secondary leading-[1.6]">
                 <p>동아대학교 경영정보학과 정교수</p>
                 <p>고려대학교 산업공학 학사</p>
                 <p>KAIST 산업공학 석·박사</p>
               </div>
               <div className="mt-4 pt-4 border-t border-border">
-                <div className="flex items-center gap-2 text-[13px] text-text-muted">
+                <div className="flex items-center gap-2 text-sm text-text-muted">
                   <Briefcase size={13} />
                   <span className="font-medium">25년+ AI 컨설팅 경력</span>
                 </div>
-                <p className="text-[11px] text-text-muted mt-1.5">
+                <p className="text-xs text-text-muted mt-1.5">
                   물류, 패션, 화학, 국방, 통신 등 다양한 산업에서 AI 컨설팅 수행
                 </p>
               </div>

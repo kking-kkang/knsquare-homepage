@@ -40,16 +40,16 @@ export default function WhyUs() {
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-14 items-center">
           <AnimatedSection>
-            <p className="text-primary font-semibold text-[13px] tracking-wide uppercase mb-2">Why Choose Us</p>
-            <h2 className="text-[1.75rem] lg:text-[2.1rem] font-bold text-navy leading-tight">
+            <p className="text-primary font-semibold text-sm tracking-wide uppercase mb-2">Why Choose Us</p>
+            <h2 className="text-[2rem] lg:text-[2.5rem] font-bold text-navy leading-tight">
               기업용 AI의<br />새로운 기준을 제시합니다
             </h2>
-            <p className="mt-4 text-text-muted max-w-md text-[15px] leading-[1.7]">
+            <p className="mt-4 text-text-muted max-w-md text-base leading-[1.7]">
               More Than a Chatbot — KNie는 단순한 챗봇이 아닌, 기업의 전략적 지식 기반입니다.
             </p>
             <a
               href="mailto:kblee@knsquare.net"
-              className="inline-flex items-center gap-2 mt-6 px-5 py-2.5 rounded-lg bg-navy text-white text-[13px] font-medium hover:bg-navy-light transition-colors"
+              className="inline-flex items-center gap-2 mt-6 px-5 py-2.5 rounded-lg bg-navy text-white text-sm font-medium hover:bg-navy-light transition-colors"
             >
               도입 문의
             </a>
@@ -70,10 +70,10 @@ export default function WhyUs() {
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-0.5">
-                      <span className="text-[10px] font-bold text-text-muted">{reason.number}</span>
-                      <h3 className="text-[15px] font-bold text-navy">{reason.title}</h3>
+                      <span className="text-[11px] font-bold text-text-muted">{reason.number}</span>
+                      <h3 className="text-base font-bold text-navy">{reason.title}</h3>
                     </div>
-                    <p className="text-[13px] text-text-muted leading-[1.6]">{reason.desc}</p>
+                    <p className="text-sm text-text-muted leading-[1.6]">{reason.desc}</p>
                   </div>
                 </div>
               </motion.div>

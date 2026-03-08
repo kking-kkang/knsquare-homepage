@@ -80,7 +80,7 @@ export default function KnieDetail() {
         <div className="max-w-5xl mx-auto px-6 lg:px-8 pt-28 pb-16">
           <Link
             href="/#products"
-            className="inline-flex items-center gap-1.5 text-[13px] text-slate-400 hover:text-white transition-colors mb-8"
+            className="inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-white transition-colors mb-8"
           >
             <ArrowLeft size={14} /> 홈으로 돌아가기
           </Link>
@@ -88,11 +88,11 @@ export default function KnieDetail() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 mb-5">
               <MessageSquareText size={14} className="text-cyan-400" />
-              <span className="text-[12px] font-medium text-cyan-300">3rd Gen Chatbot</span>
+              <span className="text-[13px] font-medium text-cyan-300">3rd Gen Chatbot</span>
             </div>
             <h1 className="text-[2rem] lg:text-[2.5rem] font-bold leading-tight">KNie</h1>
-            <p className="text-[14px] text-slate-400 mt-1 mb-4">Hybrid RAG-Based AI Chatbot System</p>
-            <p className="text-[15px] text-slate-300 max-w-2xl leading-[1.7]">
+            <p className="text-[15px] text-slate-400 mt-1 mb-4">Hybrid RAG-Based AI Chatbot System</p>
+            <p className="text-base text-slate-300 max-w-2xl leading-[1.7]">
               KNie는 단순한 챗봇이 아닙니다. Graph-RAG로 구동되는 3세대 챗봇이자,
               귀사 조직이 더 스마트하고, 더 빠르고, 더 정확하게 업무를 수행할 수 있도록 지원하는
               전략적 지식 베이스(Strategic Knowledge Base)입니다.
@@ -103,8 +103,8 @@ export default function KnieDetail() {
 
       {/* Core features */}
       <div className="max-w-5xl mx-auto px-6 lg:px-8 py-16">
-        <h2 className="text-[1.25rem] font-bold text-navy mb-2">핵심 기능</h2>
-        <p className="text-[14px] text-text-muted mb-10">실무에 즉시 투입 가능한 지능형 AI 어시스턴트</p>
+        <h2 className="text-[1.5rem] font-bold text-navy mb-2">핵심 기능</h2>
+        <p className="text-[15px] text-text-muted mb-10">실무에 즉시 투입 가능한 지능형 AI 어시스턴트</p>
 
         <div className="space-y-5">
           {features.map((feat, i) => (
@@ -120,8 +120,8 @@ export default function KnieDetail() {
                 <feat.icon size={18} className="text-white" />
               </div>
               <div>
-                <h3 className="text-[15px] font-bold text-navy mb-1">{feat.title}</h3>
-                <p className="text-[13px] text-text-secondary leading-[1.7]">{feat.desc}</p>
+                <h3 className="text-base font-bold text-navy mb-1">{feat.title}</h3>
+                <p className="text-sm text-text-secondary leading-[1.7]">{feat.desc}</p>
               </div>
             </motion.div>
           ))}
@@ -131,8 +131,8 @@ export default function KnieDetail() {
       {/* Hybrid RAG Architecture */}
       <div className="bg-surface">
         <div className="max-w-5xl mx-auto px-6 lg:px-8 py-16">
-          <h2 className="text-[1.25rem] font-bold text-navy mb-2">Hybrid RAG 아키텍처</h2>
-          <p className="text-[14px] text-text-muted mb-10">
+          <h2 className="text-[1.5rem] font-bold text-navy mb-2">Hybrid RAG 아키텍처</h2>
+          <p className="text-[15px] text-text-muted mb-10">
             두 가지 검색 기술을 결합하여 환각 없는 정확한 답변을 생성합니다.
           </p>
 
@@ -147,8 +147,8 @@ export default function KnieDetail() {
                 className={`p-6 rounded-xl border ${item.color}`}
               >
                 <item.icon size={24} className={`${item.iconColor} mb-3`} />
-                <h3 className="text-[15px] font-bold text-navy mb-2">{item.title}</h3>
-                <p className="text-[13px] text-text-secondary leading-[1.6]">{item.desc}</p>
+                <h3 className="text-base font-bold text-navy mb-2">{item.title}</h3>
+                <p className="text-sm text-text-secondary leading-[1.6]">{item.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -157,8 +157,8 @@ export default function KnieDetail() {
 
       {/* KNie vs General chatbot */}
       <div className="max-w-5xl mx-auto px-6 lg:px-8 py-16">
-        <h2 className="text-[1.25rem] font-bold text-navy mb-2">일반 AI 챗봇과의 차이</h2>
-        <p className="text-[14px] text-text-muted mb-8">절차가 복잡한 업무 질문에 강점이 있습니다.</p>
+        <h2 className="text-[1.5rem] font-bold text-navy mb-2">일반 AI 챗봇과의 차이</h2>
+        <p className="text-[15px] text-text-muted mb-8">절차가 복잡한 업무 질문에 강점이 있습니다.</p>
 
         <div className="grid sm:grid-cols-2 gap-3">
           {Array.from({ length: 3 }).map((_, row) => {
@@ -167,14 +167,14 @@ export default function KnieDetail() {
             return (
               <div key={row} className="contents">
                 <div className="p-4 rounded-xl bg-slate-50 border border-slate-100">
-                  <span className="text-[11px] font-medium text-slate-400 mb-1 block">{gen.label}</span>
-                  <span className="text-[13px] text-slate-500">{gen.value}</span>
+                  <span className="text-xs font-medium text-slate-400 mb-1 block">{gen.label}</span>
+                  <span className="text-sm text-slate-500">{gen.value}</span>
                 </div>
                 <div className="p-4 rounded-xl bg-blue-50 border border-blue-100">
-                  <span className="text-[11px] font-semibold text-primary mb-1 block flex items-center gap-1">
+                  <span className="text-xs font-semibold text-primary mb-1 block flex items-center gap-1">
                     <ShieldCheck size={12} /> {knie.label}
                   </span>
-                  <span className="text-[13px] text-navy font-medium">{knie.value}</span>
+                  <span className="text-sm text-navy font-medium">{knie.value}</span>
                 </div>
               </div>
             );
@@ -185,18 +185,18 @@ export default function KnieDetail() {
       {/* CTA */}
       <div className="bg-navy text-white">
         <div className="max-w-5xl mx-auto px-6 lg:px-8 py-14 text-center">
-          <h2 className="text-[1.25rem] font-bold mb-3">KNie 도입을 검토하고 계신가요?</h2>
-          <p className="text-[14px] text-slate-400 mb-6">제조·공급사슬 현장의 의사결정을 돕고 생산성을 높일 수 있습니다.</p>
+          <h2 className="text-[1.5rem] font-bold mb-3">KNie 도입을 검토하고 계신가요?</h2>
+          <p className="text-[15px] text-slate-400 mb-6">제조·공급사슬 현장의 의사결정을 돕고 생산성을 높일 수 있습니다.</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a
               href="mailto:kblee@knsquare.net"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-white text-navy text-[14px] font-semibold hover:bg-slate-100 transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-white text-navy text-[15px] font-semibold hover:bg-slate-100 transition-colors"
             >
               문의하기 <ArrowRight size={15} />
             </a>
             <Link
               href="/solutions/kraph"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border border-white/20 text-white text-[14px] font-medium hover:bg-white/10 transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border border-white/20 text-white text-[15px] font-medium hover:bg-white/10 transition-colors"
             >
               Kraph도 알아보기
             </Link>
