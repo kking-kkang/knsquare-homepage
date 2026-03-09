@@ -8,15 +8,15 @@ import KnowledgeGraph from "./KnowledgeGraph";
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex flex-col overflow-hidden bg-[#F0F6FF]">
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 z-[2]">
         <KnowledgeGraph />
       </div>
-      <div className="absolute inset-0 bg-grid opacity-40" />
-      <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-[#F0F6FF] via-[#F0F6FF]/90 to-transparent z-[1]" />
-      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#F0F6FF] via-[#F0F6FF]/80 to-transparent z-[1]" />
-      <div className="absolute top-0 left-0 bottom-0 w-[45%] bg-gradient-to-r from-[#F0F6FF] via-[#F0F6FF]/95 to-transparent z-[1]" />
+      <div className="absolute inset-0 bg-grid opacity-40 pointer-events-none" />
+      <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-[#F0F6FF] via-[#F0F6FF]/90 to-transparent z-[3] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#F0F6FF] via-[#F0F6FF]/80 to-transparent z-[3] pointer-events-none" />
+      <div className="absolute top-0 left-0 bottom-0 w-[45%] bg-gradient-to-r from-[#F0F6FF] via-[#F0F6FF]/95 to-transparent z-[3] pointer-events-none" />
 
-      <div className="relative z-10 flex-1 flex items-center">
+      <div className="relative z-10 flex-1 flex items-center pointer-events-none">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full pt-24 pb-16">
           <div className="max-w-xl">
             {/* Award — links to article */}
@@ -27,7 +27,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50/90 backdrop-blur-sm border border-amber-200/60 mb-5 hover:bg-amber-100/80 transition-colors cursor-pointer"
+              className="pointer-events-auto inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50/90 backdrop-blur-sm border border-amber-200/60 mb-5 hover:bg-amber-100/80 transition-colors cursor-pointer"
             >
               <Trophy size={13} className="text-amber-500 shrink-0" />
               <span className="text-[13px] font-medium text-amber-700">
@@ -65,7 +65,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.7 }}
-              className="mt-8 flex flex-col sm:flex-row gap-3"
+              className="mt-8 flex flex-col sm:flex-row gap-3 pointer-events-auto"
             >
               <a
                 href="#products"
@@ -109,7 +109,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
-        className="relative z-10 flex justify-center pb-8"
+        className="relative z-10 flex justify-center pb-8 pointer-events-auto"
       >
         <a href="#products" className="flex flex-col items-center gap-1 text-text-muted hover:text-primary transition-colors">
           <span className="text-[11px] font-medium tracking-widest uppercase">Scroll</span>

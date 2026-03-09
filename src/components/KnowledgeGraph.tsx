@@ -7,14 +7,17 @@ interface KGNode {
   y: number;
   targetX: number;
   targetY: number;
+  baseRadius: number;
   radius: number;
   label: string;
   group: number;
   angle: number;
+  baseAngle: number;
   orbitRadius: number;
   orbitSpeed: number;
   appearTime: number;
   color: string;
+  hoverScale: number;
 }
 
 interface KGEdge {
@@ -35,8 +38,8 @@ const COLORS = {
 
 const NODE_DATA: { label: string; group: number; color?: string }[] = [
   { label: "Knowledge\nGraph", group: 0, color: COLORS.core },
-  { label: "온톨로지", group: 1, color: COLORS.inner },
-  { label: "엔터티 추출", group: 1, color: COLORS.accent1 },
+  { label: "Ontology", group: 1, color: COLORS.inner },
+  { label: "Entity Extraction", group: 1, color: COLORS.accent1 },
   { label: "Vector RAG", group: 1, color: COLORS.accent2 },
   { label: "Graph RAG", group: 1, color: COLORS.inner },
   { label: "Kraph", group: 1, color: COLORS.core },
@@ -44,11 +47,11 @@ const NODE_DATA: { label: string; group: number; color?: string }[] = [
   { label: "PDF", group: 2 },
   { label: "DOCX", group: 2 },
   { label: "XLSX", group: 2 },
-  { label: "추론", group: 2, color: COLORS.accent3 },
-  { label: "출처 검증", group: 2, color: COLORS.accent3 },
-  { label: "의사결정", group: 2 },
+  { label: "Reasoning", group: 2, color: COLORS.accent3 },
+  { label: "Verification", group: 2, color: COLORS.accent3 },
+  { label: "Decision", group: 2 },
   { label: "Q&A", group: 2, color: COLORS.accent1 },
-  { label: "관계 매핑", group: 2 },
+  { label: "Mapping", group: 2 },
   { label: "LLM", group: 2, color: COLORS.accent2 },
   { label: "OCR", group: 2 },
 ];
@@ -93,28 +96,31 @@ export default function KnowledgeGraph() {
 
     const nodes: KGNode[] = NODE_DATA.map((d, i) => {
       let angle = 0, orbitR = 0, r = 6;
-      if (d.group === 0) { orbitR = 0; r = 28; }
+      if (d.group === 0) { orbitR = 0; r = 45; }
       else if (d.group === 1) {
         const cnt = NODE_DATA.filter(n => n.group === 1).length;
         const idx = NODE_DATA.filter((n, j) => n.group === 1 && j < i).length;
         angle = (idx / cnt) * Math.PI * 2 - Math.PI / 2;
-        orbitR = base * 0.52; r = 16;
+        orbitR = base * 0.55; r = 18;
       } else {
         const cnt = NODE_DATA.filter(n => n.group === 2).length;
         const idx = NODE_DATA.filter((n, j) => n.group === 2 && j < i).length;
         angle = (idx / cnt) * Math.PI * 2 - Math.PI / 4;
-        orbitR = base * 0.92; r = 10;
+        orbitR = base * 0.95; r = 11;
       }
 
       return {
         x: cx, y: cy,
         targetX: cx + Math.cos(angle) * orbitR,
         targetY: cy + Math.sin(angle) * orbitR,
-        radius: r, label: d.label, group: d.group,
-        angle, orbitRadius: orbitR,
-        orbitSpeed: (d.group === 1 ? 0.0003 : 0.0002) + Math.random() * 0.0002,
+        baseRadius: r, radius: r,
+        label: d.label, group: d.group,
+        angle, baseAngle: angle,
+        orbitRadius: orbitR,
+        orbitSpeed: (d.group === 1 ? 0.00015 : 0.0001) + Math.random() * 0.0001,
         appearTime: d.group === 0 ? 100 : d.group === 1 ? 400 + i * 120 : 1000 + i * 70,
         color: d.color || COLORS.outer,
+        hoverScale: 1,
       };
     });
 
@@ -138,7 +144,7 @@ export default function KnowledgeGraph() {
       nodes.forEach(n => {
         if (n.group === 0) { n.targetX = cx; n.targetY = cy; }
         else {
-          const orbitR = n.group === 1 ? base * 0.52 : base * 0.92;
+          const orbitR = n.group === 1 ? base * 0.55 : base * 0.95;
           n.orbitRadius = orbitR;
           n.targetX = cx + Math.cos(n.angle) * orbitR;
           n.targetY = cy + Math.sin(n.angle) * orbitR;
@@ -164,36 +170,36 @@ export default function KnowledgeGraph() {
 
       ctx.clearRect(0, 0, W, H);
 
-      // Orbit drift
+      // Orbit drift — slow & stable
       nodes.forEach(n => {
         if (n.group === 0) return;
         n.angle += n.orbitSpeed;
-        n.targetX = (n.group === 0 ? cx : cx) + Math.cos(n.angle) * n.orbitRadius;
-        n.targetY = (n.group === 0 ? cy : cy) + Math.sin(n.angle) * n.orbitRadius;
+        n.targetX = cx + Math.cos(n.angle) * n.orbitRadius;
+        n.targetY = cy + Math.sin(n.angle) * n.orbitRadius;
       });
 
-      // Spring toward target
+      // Strong spring toward target — keeps structure tight
       nodes.forEach(n => {
         if (elapsed < n.appearTime) { n.x = cx; n.y = cy; return; }
-        n.x += (n.targetX - n.x) * 0.045;
-        n.y += (n.targetY - n.y) * 0.045;
+        n.x += (n.targetX - n.x) * 0.08;
+        n.y += (n.targetY - n.y) * 0.08;
       });
 
-      // Mouse repel
+      // Mouse hover detection — scale up nearby nodes
       const mx = mouseRef.current.x, my = mouseRef.current.y;
       nodes.forEach(n => {
+        if (elapsed < n.appearTime) return;
         const dx = n.x - mx, dy = n.y - my;
         const dist = Math.hypot(dx, dy);
-        if (dist < 100 && dist > 0) {
-          const f = (100 - dist) / 100 * 4;
-          n.x += (dx / dist) * f;
-          n.y += (dy / dist) * f;
-        }
+        const hoverRange = n.group === 0 ? 80 : n.group === 1 ? 40 : 30;
+        const targetScale = dist < hoverRange + n.baseRadius ? 1.4 : 1;
+        n.hoverScale += (targetScale - n.hoverScale) * 0.15;
+        n.radius = n.baseRadius * n.hoverScale;
       });
 
       // Orbit rings
       const base = Math.min(W, H) * 0.34;
-      [0.52, 0.92].forEach(mult => {
+      [0.55, 0.95].forEach(mult => {
         const ringAlpha = Math.min(0.06, (elapsed - 300) / 2000 * 0.06);
         if (ringAlpha <= 0) return;
         ctx.beginPath();
@@ -250,11 +256,13 @@ export default function KnowledgeGraph() {
       nodes.forEach(n => {
         if (elapsed < n.appearTime) return;
         const alpha = Math.min(1, (elapsed - n.appearTime) / 500);
+        const isHovered = n.hoverScale > 1.1;
 
         // Glow
         const glowR = n.radius * (n.group === 0 ? 3 : 2.2);
+        const glowAlpha = isHovered ? alpha * 40 : alpha * 20;
         const gGrad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, glowR);
-        gGrad.addColorStop(0, `${n.color}${Math.round(alpha * 20).toString(16).padStart(2, "0")}`);
+        gGrad.addColorStop(0, `${n.color}${Math.round(glowAlpha).toString(16).padStart(2, "0")}`);
         gGrad.addColorStop(1, `${n.color}00`);
         ctx.beginPath();
         ctx.arc(n.x, n.y, glowR, 0, Math.PI * 2);
@@ -265,13 +273,13 @@ export default function KnowledgeGraph() {
         ctx.beginPath();
         ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
         if (n.group === 0) {
-          const grad = ctx.createRadialGradient(n.x - 6, n.y - 6, 0, n.x, n.y, n.radius);
+          const grad = ctx.createRadialGradient(n.x - 8, n.y - 8, 0, n.x, n.y, n.radius);
           grad.addColorStop(0, "#3B82F6");
           grad.addColorStop(1, "#1D4ED8");
           ctx.fillStyle = grad;
           ctx.fill();
           ctx.strokeStyle = `rgba(59, 130, 246, ${0.8 * alpha})`;
-          ctx.lineWidth = 2.5;
+          ctx.lineWidth = 3;
           ctx.stroke();
         } else if (n.group === 1) {
           ctx.fillStyle = "#FFFFFF";
@@ -279,7 +287,6 @@ export default function KnowledgeGraph() {
           ctx.strokeStyle = `${n.color}${Math.round(alpha * 200).toString(16).padStart(2, "0")}`;
           ctx.lineWidth = 2.5;
           ctx.stroke();
-          // Inner colored dot for emphasis
           ctx.beginPath();
           ctx.arc(n.x, n.y, 5, 0, Math.PI * 2);
           ctx.fillStyle = `${n.color}${Math.round(alpha * 200).toString(16).padStart(2, "0")}`;
@@ -290,7 +297,6 @@ export default function KnowledgeGraph() {
           ctx.strokeStyle = `rgba(59, 130, 246, ${0.5 * alpha})`;
           ctx.lineWidth = 1.5;
           ctx.stroke();
-          // Larger colored dot
           ctx.beginPath();
           ctx.arc(n.x, n.y, 4, 0, Math.PI * 2);
           ctx.fillStyle = `${n.color}${Math.round(alpha * 230).toString(16).padStart(2, "0")}`;
@@ -304,11 +310,13 @@ export default function KnowledgeGraph() {
         ctx.textBaseline = "middle";
 
         if (n.group === 0) {
-          ctx.font = `bold 14px Inter, sans-serif`;
+          // Center node label
+          ctx.font = `bold 16px Inter, sans-serif`;
           ctx.fillStyle = `rgba(255,255,255,${lblAlpha})`;
           const lines = n.label.split("\n");
-          lines.forEach((l, li) => ctx.fillText(l, n.x, n.y + (li - (lines.length - 1) / 2) * 16));
+          lines.forEach((l, li) => ctx.fillText(l, n.x, n.y + (li - (lines.length - 1) / 2) * 18));
         } else {
+          // All other nodes — always show label
           const fs = n.group === 1 ? 11 : 9.5;
           ctx.font = `600 ${fs}px Inter, "Noto Sans KR", sans-serif`;
           const tw = ctx.measureText(n.label).width + 14;
@@ -316,9 +324,10 @@ export default function KnowledgeGraph() {
           const py = n.y + n.radius + 10;
 
           // Pill bg
-          ctx.fillStyle = `rgba(255,255,255,${lblAlpha * 0.92})`;
-          ctx.shadowColor = "rgba(0,0,0,0.06)";
-          ctx.shadowBlur = 8;
+          const pillAlpha = isHovered ? 0.98 : lblAlpha * 0.88;
+          ctx.fillStyle = `rgba(255,255,255,${pillAlpha})`;
+          ctx.shadowColor = `rgba(0,0,0,${isHovered ? 0.1 : 0.05})`;
+          ctx.shadowBlur = isHovered ? 12 : 6;
           ctx.shadowOffsetY = 2;
           ctx.beginPath();
           ctx.roundRect(n.x - tw / 2, py - ph / 2, tw, ph, 6);
@@ -328,12 +337,16 @@ export default function KnowledgeGraph() {
           ctx.shadowOffsetY = 0;
 
           // Pill border
-          ctx.strokeStyle = `rgba(226, 232, 240, ${lblAlpha * 0.5})`;
-          ctx.lineWidth = 0.5;
+          ctx.strokeStyle = isHovered
+            ? `rgba(59, 130, 246, ${lblAlpha * 0.5})`
+            : `rgba(226, 232, 240, ${lblAlpha * 0.5})`;
+          ctx.lineWidth = isHovered ? 1 : 0.5;
           ctx.stroke();
 
           // Text
-          ctx.fillStyle = `rgba(30, 41, 59, ${lblAlpha * 0.9})`;
+          ctx.fillStyle = isHovered
+            ? `rgba(15, 23, 42, ${lblAlpha})`
+            : `rgba(30, 41, 59, ${lblAlpha * 0.85})`;
           ctx.fillText(n.label, n.x, py + 0.5);
         }
       });
