@@ -121,7 +121,7 @@ export default function KraphDetail() {
           className="rounded-2xl border border-border bg-white p-4 sm:p-6 shadow-sm"
         >
           <Image
-            src="/KNSquare 도식화 이미지/전체과정.png"
+            src="/images/overall-process.png"
             alt="KNSquare 전체 프로세스 — INPUT DATA → Kraph Processing → KNie Output"
             width={1400}
             height={400}
@@ -145,7 +145,7 @@ export default function KraphDetail() {
             className="mb-10 rounded-2xl border border-border bg-white p-4 sm:p-6 shadow-sm"
           >
             <Image
-              src="/KNSquare 도식화 이미지/Kraph.png"
+              src="/images/kraph-process.png"
               alt="Kraph 작동 프로세스 — Ontology Design → KG Construction → Hybrid RAG Implementation"
               width={900}
               height={350}

@@ -116,7 +116,7 @@ export default function KnieDetail() {
           className="rounded-2xl border border-border bg-white p-4 sm:p-6 shadow-sm"
         >
           <Image
-            src="/KNSquare 도식화 이미지/kNie예시.png"
+            src="/images/knie-demo.png"
             alt="KNie 실행 화면 — 출장비 지급 규정 질의 응답 예시"
             width={1400}
             height={500}
@@ -183,7 +183,7 @@ export default function KnieDetail() {
             className="mb-10 rounded-2xl border border-border bg-white p-4 sm:p-6 shadow-sm"
           >
             <Image
-              src="/KNSquare 도식화 이미지/KNSquare AI Agent Architecture.png"
+              src="/images/ai-agent-architecture.png"
               alt="KNSquare AI Agent Architecture — Perception, Reasoning, Knowledge, Memory, Learning, Action"
               width={900}
               height={600}

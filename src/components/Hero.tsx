@@ -27,7 +27,7 @@ export default function Hero() {
               className="mb-6"
             >
               <Image
-                src="/지식광장네트워크로고.png"
+                src="/images/logo.png"
                 alt="KNSquare — (주)지식광장네트워크"
                 width={400}
                 height={135}

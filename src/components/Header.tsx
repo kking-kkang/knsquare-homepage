@@ -39,7 +39,7 @@ export default function Header() {
         <div className="flex items-center justify-between h-16 lg:h-[72px]">
           <a href="#" className="flex items-center shrink-0">
             <Image
-              src="/지식광장네트워크로고.png"
+              src="/images/logo.png"
               alt="KNSquare"
               width={200}
               height={50}

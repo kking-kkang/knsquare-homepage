@@ -16,7 +16,7 @@ export default function Footer() {
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
           <div>
             <Image
-              src="/지식광장네트워크로고.png"
+              src="/images/logo.png"
               alt="KNSquare"
               width={180}
               height={45}
