@@ -19,6 +19,23 @@ export default function Hero() {
       <div className="relative z-10 flex-1 flex items-center">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full pt-24 pb-16">
           <div className="max-w-xl">
+            {/* Company Logo */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="mb-6"
+            >
+              <Image
+                src="/지식광장네트워크로고.png"
+                alt="KNSquare — (주)지식광장네트워크"
+                width={400}
+                height={135}
+                className="h-20 sm:h-28 w-auto"
+                priority
+              />
+            </motion.div>
+
             {/* Award — links to article */}
             <motion.a
               href="https://www.mt.co.kr/industry/2026/03/04/2026030414342817118"

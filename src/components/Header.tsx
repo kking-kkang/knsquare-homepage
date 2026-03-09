@@ -39,11 +39,11 @@ export default function Header() {
         <div className="flex items-center justify-between h-16 lg:h-[72px]">
           <a href="#" className="flex items-center shrink-0">
             <Image
-              src="/지식광장네트워크 로고.png"
+              src="/지식광장네트워크로고.png"
               alt="KNSquare"
-              width={140}
-              height={36}
-              className="h-7 lg:h-8 w-auto"
+              width={200}
+              height={50}
+              className="h-10 lg:h-11 w-auto"
               priority
             />
           </a>

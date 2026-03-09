@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
@@ -101,6 +102,43 @@ export default function KnieDetail() {
         </div>
       </div>
 
+      {/* KNie Demo Screenshot */}
+      <div className="max-w-5xl mx-auto px-6 lg:px-8 pt-16 pb-8">
+        <h2 className="text-[1.5rem] font-bold text-navy mb-2">KNie 실행 화면</h2>
+        <p className="text-[15px] text-text-muted mb-8">
+          사내 규정에 대한 질문에 즉각적이고 정확한 답변을 제공하며, 출처를 함께 표시합니다.
+        </p>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="rounded-2xl border border-border bg-white p-4 sm:p-6 shadow-sm"
+        >
+          <Image
+            src="/KNSquare 도식화 이미지/kNie예시.png"
+            alt="KNie 실행 화면 — 출장비 지급 규정 질의 응답 예시"
+            width={1400}
+            height={500}
+            className="w-full h-auto rounded-lg"
+          />
+          <div className="mt-4 flex flex-col sm:flex-row gap-4 text-sm text-text-secondary">
+            <div className="flex items-start gap-2 flex-1">
+              <div className="shrink-0 w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center mt-0.5">
+                <span className="text-[10px] font-bold text-blue-600">1</span>
+              </div>
+              <span>기업의 업무 프로세스, 규정, 제품 정보 등 비정형 지식을 바탕으로 <strong className="text-navy">즉각적인 해답</strong>을 제시합니다.</span>
+            </div>
+            <div className="flex items-start gap-2 flex-1">
+              <div className="shrink-0 w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center mt-0.5">
+                <span className="text-[10px] font-bold text-blue-600">2</span>
+              </div>
+              <span>내부 규정에 기반한 <strong className="text-navy">정확한 출처 표기</strong>를 통해 사용자의 신뢰도를 극대화합니다.</span>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+
       {/* Core features */}
       <div className="max-w-5xl mx-auto px-6 lg:px-8 py-16">
         <h2 className="text-[1.5rem] font-bold text-navy mb-2">핵심 기능</h2>
@@ -135,6 +173,26 @@ export default function KnieDetail() {
           <p className="text-[15px] text-text-muted mb-10">
             두 가지 검색 기술을 결합하여 환각 없는 정확한 답변을 생성합니다.
           </p>
+
+          {/* AI Agent Architecture Diagram */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="mb-10 rounded-2xl border border-border bg-white p-4 sm:p-6 shadow-sm"
+          >
+            <Image
+              src="/KNSquare 도식화 이미지/KNSquare AI Agent Architecture.png"
+              alt="KNSquare AI Agent Architecture — Perception, Reasoning, Knowledge, Memory, Learning, Action"
+              width={900}
+              height={600}
+              className="w-full h-auto rounded-lg max-w-2xl mx-auto"
+            />
+            <p className="text-center text-[13px] text-text-muted mt-4">
+              KNSquare AI Agent Architecture — 인지(Perception), 추론(Reasoning), 지식표현(Knowledge), 메모리(Memory), 학습(Learning), 실행(Action) 모듈의 유기적 결합
+            </p>
+          </motion.div>
 
           <div className="grid md:grid-cols-3 gap-4">
             {architecture.map((item, i) => (

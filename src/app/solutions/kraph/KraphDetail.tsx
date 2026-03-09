@@ -107,11 +107,51 @@ export default function KraphDetail() {
         </div>
       </div>
 
+      {/* Overall Process Diagram */}
+      <div className="max-w-5xl mx-auto px-6 lg:px-8 pt-16 pb-8">
+        <h2 className="text-[1.5rem] font-bold text-navy mb-2">전체 프로세스 Overview</h2>
+        <p className="text-[15px] text-text-muted mb-8">
+          다양한 문서 입력부터 Kraph를 거쳐 KNie 챗봇 출력까지의 전체 흐름입니다.
+        </p>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="rounded-2xl border border-border bg-white p-4 sm:p-6 shadow-sm"
+        >
+          <Image
+            src="/KNSquare 도식화 이미지/전체과정.png"
+            alt="KNSquare 전체 프로세스 — INPUT DATA → Kraph Processing → KNie Output"
+            width={1400}
+            height={400}
+            className="w-full h-auto rounded-lg"
+          />
+        </motion.div>
+      </div>
+
       {/* Process steps */}
       <div className="bg-surface">
         <div className="max-w-5xl mx-auto px-6 lg:px-8 py-16">
           <h2 className="text-[1.5rem] font-bold text-navy mb-2">작동 프로세스</h2>
-          <p className="text-[15px] text-text-muted mb-10">4단계를 거쳐 문서가 지식그래프로 전환됩니다.</p>
+          <p className="text-[15px] text-text-muted mb-8">4단계를 거쳐 문서가 지식그래프로 전환됩니다.</p>
+
+          {/* Kraph Process Diagram */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="mb-10 rounded-2xl border border-border bg-white p-4 sm:p-6 shadow-sm"
+          >
+            <Image
+              src="/KNSquare 도식화 이미지/Kraph.png"
+              alt="Kraph 작동 프로세스 — Ontology Design → KG Construction → Hybrid RAG Implementation"
+              width={900}
+              height={350}
+              className="w-full h-auto rounded-lg"
+            />
+          </motion.div>
 
           <div className="space-y-6">
             {steps.map((step, i) => (

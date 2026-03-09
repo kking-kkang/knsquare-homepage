@@ -16,11 +16,11 @@ export default function Footer() {
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
           <div>
             <Image
-              src="/지식광장네트워크 로고.png"
+              src="/지식광장네트워크로고.png"
               alt="KNSquare"
-              width={130}
-              height={32}
-              className="h-7 w-auto mb-3"
+              width={180}
+              height={45}
+              className="h-10 w-auto mb-3"
             />
             <p className="text-sm text-text-muted max-w-xs">
               AI & Knowledge Graph Innovation
