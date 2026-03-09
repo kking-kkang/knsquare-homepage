@@ -152,7 +152,7 @@ export default function KraphDetail() {
             <div key={uc.title} className="p-5 rounded-xl border border-border hover:shadow-md transition-shadow">
               <uc.icon size={20} className="text-primary mb-3" />
               <h3 className="text-[15px] font-bold text-navy mb-1">{uc.title}</h3>
-              <p className="text-sm text-text-muted leading-[1.6]">{uc.desc}</p>
+              <p className="text-sm text-text-muted leading-[1.75]">{uc.desc}</p>
             </div>
           ))}
         </div>

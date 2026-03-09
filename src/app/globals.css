@@ -44,13 +44,27 @@
   --font-korean: var(--font-noto-sans-kr);
 }
 
+/* Korean typography essentials */
+* {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
 html {
   scroll-behavior: smooth;
+  letter-spacing: -0.01em;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+  font-family: var(--font-inter), var(--font-noto-sans-kr), "Noto Sans KR", sans-serif;
+  line-height: 1.7;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.35;
+  letter-spacing: -0.02em;
 }
 
 /* Gradient text utility */

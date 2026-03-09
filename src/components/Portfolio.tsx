@@ -95,7 +95,7 @@ export default function Portfolio() {
                   </span>
                 </div>
 
-                <p className="text-sm text-text-secondary leading-[1.6] mb-4">{c.desc}</p>
+                <p className="text-sm text-text-secondary leading-[1.75] mb-4">{c.desc}</p>
 
                 {c.metrics.length > 0 && (
                   <div className="flex gap-5 mb-4 pb-4 border-b border-border">

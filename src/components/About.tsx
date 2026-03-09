@@ -81,7 +81,7 @@ export default function About() {
               </div>
               <h3 className="text-[17px] font-bold text-navy">이강배 박사</h3>
               <p className="text-[13px] text-primary font-semibold mt-0.5">CEO / Lead Consultant</p>
-              <div className="mt-3 space-y-1.5 text-sm text-text-secondary leading-[1.6]">
+              <div className="mt-3 space-y-1.5 text-sm text-text-secondary leading-[1.75]">
                 <p>동아대학교 경영정보학과 정교수</p>
                 <p>고려대학교 산업공학 학사</p>
                 <p>KAIST 산업공학 석·박사</p>

@@ -148,7 +148,7 @@ export default function KnieDetail() {
               >
                 <item.icon size={24} className={`${item.iconColor} mb-3`} />
                 <h3 className="text-base font-bold text-navy mb-2">{item.title}</h3>
-                <p className="text-sm text-text-secondary leading-[1.6]">{item.desc}</p>
+                <p className="text-sm text-text-secondary leading-[1.75]">{item.desc}</p>
               </motion.div>
             ))}
           </div>

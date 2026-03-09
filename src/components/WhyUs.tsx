@@ -73,7 +73,7 @@ export default function WhyUs() {
                       <span className="text-[11px] font-bold text-text-muted">{reason.number}</span>
                       <h3 className="text-base font-bold text-navy">{reason.title}</h3>
                     </div>
-                    <p className="text-sm text-text-muted leading-[1.6]">{reason.desc}</p>
+                    <p className="text-sm text-text-muted leading-[1.75]">{reason.desc}</p>
                   </div>
                 </div>
               </motion.div>

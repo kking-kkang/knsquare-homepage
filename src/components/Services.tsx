@@ -104,7 +104,7 @@ export default function Services() {
                 </div>
                 <h3 className="text-[15px] font-bold text-navy">{svc.title}</h3>
                 <p className="text-xs text-text-muted mt-0.5 mb-2">{svc.titleKr}</p>
-                <p className="text-sm text-text-secondary leading-[1.6]">{svc.desc}</p>
+                <p className="text-sm text-text-secondary leading-[1.75]">{svc.desc}</p>
               </div>
             </motion.div>
           ))}

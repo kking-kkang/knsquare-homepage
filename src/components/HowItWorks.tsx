@@ -74,7 +74,7 @@ export default function HowItWorks() {
 
                 <h3 className="text-[16px] font-bold">{step.title}</h3>
                 <p className="text-primary-light text-[13px] font-medium mt-0.5">{step.titleKr}</p>
-                <p className="text-slate-400 text-sm leading-[1.6] mt-3">{step.desc}</p>
+                <p className="text-slate-400 text-sm leading-[1.75] mt-3">{step.desc}</p>
               </div>
 
               {i < steps.length - 1 && (

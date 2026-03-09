@@ -117,7 +117,7 @@ export default function Products() {
                           <feat.icon size={16} className="text-primary" />
                         </div>
                         <h4 className="text-sm font-bold text-navy mb-1">{feat.title}</h4>
-                        <p className="text-[13px] text-text-muted leading-[1.6]">{feat.desc}</p>
+                        <p className="text-[13px] text-text-muted leading-[1.75]">{feat.desc}</p>
                       </div>
                     ))}
                   </div>
