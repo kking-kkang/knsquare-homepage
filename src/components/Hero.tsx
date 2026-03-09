@@ -7,35 +7,18 @@ import KnowledgeGraph from "./KnowledgeGraph";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col overflow-hidden bg-white">
+    <section className="relative min-h-screen flex flex-col overflow-hidden bg-[#F0F6FF]">
       <div className="absolute inset-0">
         <KnowledgeGraph />
       </div>
       <div className="absolute inset-0 bg-grid opacity-40" />
-      <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-white via-white/90 to-transparent z-[1]" />
-      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-white via-white/80 to-transparent z-[1]" />
-      <div className="absolute top-0 left-0 bottom-0 w-[45%] bg-gradient-to-r from-white via-white/95 to-transparent z-[1]" />
+      <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-[#F0F6FF] via-[#F0F6FF]/90 to-transparent z-[1]" />
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#F0F6FF] via-[#F0F6FF]/80 to-transparent z-[1]" />
+      <div className="absolute top-0 left-0 bottom-0 w-[45%] bg-gradient-to-r from-[#F0F6FF] via-[#F0F6FF]/95 to-transparent z-[1]" />
 
       <div className="relative z-10 flex-1 flex items-center">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full pt-24 pb-16">
           <div className="max-w-xl">
-            {/* Company Logo */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="mb-6"
-            >
-              <Image
-                src="/images/logo.png"
-                alt="KNSquare — (주)지식광장네트워크"
-                width={400}
-                height={135}
-                className="h-20 sm:h-28 w-auto"
-                priority
-              />
-            </motion.div>
-
             {/* Award — links to article */}
             <motion.a
               href="https://www.mt.co.kr/industry/2026/03/04/2026030414342817118"
@@ -71,7 +54,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.55 }}
-              className="mt-5 text-base sm:text-base text-text-secondary max-w-md leading-[1.7]"
+              className="mt-5 text-base sm:text-base text-text-secondary max-w-lg leading-[1.7]"
             >
               방대한 비정형 문서를 체계적 지식으로 전환하여,
               정확하고 신뢰할 수 있는 인사이트를 제공합니다.

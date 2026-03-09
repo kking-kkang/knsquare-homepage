@@ -219,16 +219,16 @@ export default function KnowledgeGraph() {
         ctx.beginPath();
         ctx.moveTo(a.x, a.y);
         ctx.lineTo(ex, ey);
-        ctx.strokeStyle = `rgba(37, 99, 235, ${0.05 * e.progress})`;
-        ctx.lineWidth = 5;
+        ctx.strokeStyle = `rgba(59, 130, 246, ${0.1 * e.progress})`;
+        ctx.lineWidth = 6;
         ctx.stroke();
 
         // Line
         ctx.beginPath();
         ctx.moveTo(a.x, a.y);
         ctx.lineTo(ex, ey);
-        ctx.strokeStyle = `rgba(148, 163, 184, ${0.2 * e.progress})`;
-        ctx.lineWidth = 1;
+        ctx.strokeStyle = `rgba(59, 130, 246, ${0.35 * e.progress})`;
+        ctx.lineWidth = 1.5;
         ctx.stroke();
 
         // Particle
@@ -270,25 +270,30 @@ export default function KnowledgeGraph() {
           grad.addColorStop(1, "#1D4ED8");
           ctx.fillStyle = grad;
           ctx.fill();
-          ctx.strokeStyle = `rgba(96, 165, 250, ${0.6 * alpha})`;
-          ctx.lineWidth = 2;
+          ctx.strokeStyle = `rgba(59, 130, 246, ${0.8 * alpha})`;
+          ctx.lineWidth = 2.5;
           ctx.stroke();
         } else if (n.group === 1) {
           ctx.fillStyle = "#FFFFFF";
           ctx.fill();
-          ctx.strokeStyle = `${n.color}${Math.round(alpha * 100).toString(16).padStart(2, "0")}`;
-          ctx.lineWidth = 2;
+          ctx.strokeStyle = `${n.color}${Math.round(alpha * 200).toString(16).padStart(2, "0")}`;
+          ctx.lineWidth = 2.5;
           ctx.stroke();
+          // Inner colored dot for emphasis
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, 5, 0, Math.PI * 2);
+          ctx.fillStyle = `${n.color}${Math.round(alpha * 200).toString(16).padStart(2, "0")}`;
+          ctx.fill();
         } else {
           ctx.fillStyle = "#FFFFFF";
           ctx.fill();
-          ctx.strokeStyle = `rgba(203, 213, 225, ${0.6 * alpha})`;
-          ctx.lineWidth = 1;
+          ctx.strokeStyle = `rgba(59, 130, 246, ${0.5 * alpha})`;
+          ctx.lineWidth = 1.5;
           ctx.stroke();
-          // Small colored dot
+          // Larger colored dot
           ctx.beginPath();
-          ctx.arc(n.x, n.y, 3, 0, Math.PI * 2);
-          ctx.fillStyle = `${n.color}${Math.round(alpha * 180).toString(16).padStart(2, "0")}`;
+          ctx.arc(n.x, n.y, 4, 0, Math.PI * 2);
+          ctx.fillStyle = `${n.color}${Math.round(alpha * 230).toString(16).padStart(2, "0")}`;
           ctx.fill();
         }
 
