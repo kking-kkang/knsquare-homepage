@@ -13,7 +13,7 @@ const reasons = [
     icon: Database,
     number: "01",
     title: "데이터의 자산화",
-    desc: "단순한 검색을 넘어, 기업 내 숨겨진 지식을 구조화하고 영구적인 자산으로 만듭니다.",
+    desc: "단순한 검색을 넘어, 기업 내 숨겨진 지식을 구조화하고 영구적인 자산으로 전환합니다. 조직의 핵심 노하우를 체계적으로 보존합니다.",
     color: "from-blue-500 to-indigo-500",
   },
   {
@@ -27,7 +27,7 @@ const reasons = [
     icon: RefreshCw,
     number: "03",
     title: "지속적인 진화",
-    desc: "사용자 피드백을 통해 온톨로지와 AI 모델이 지속적으로 발전하는 선순환 구조를 제공합니다.",
+    desc: "사용자 피드백을 통해 온톨로지와 AI 모델이 지속적으로 발전하는 선순환 구조를 제공합니다. 쓸수록 더 똑똑해지는 시스템입니다.",
     color: "from-emerald-500 to-teal-500",
   },
 ];
@@ -64,7 +64,7 @@ export default function WhyUs() {
           >
             {reasons.map((reason) => (
               <motion.div key={reason.title} variants={fadeInRight} transition={{ duration: 0.5 }} className="card-hover">
-                <div className="flex gap-4 p-5 rounded-xl bg-white border border-border">
+                <div className="flex gap-4 p-5 rounded-xl bg-white border border-border h-full">
                   <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${reason.color} flex items-center justify-center shrink-0`}>
                     <reason.icon size={18} className="text-white" />
                   </div>
