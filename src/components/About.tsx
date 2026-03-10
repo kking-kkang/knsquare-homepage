@@ -50,6 +50,13 @@ const milestones: { year: string; items: string[]; highlight?: boolean }[] = [
     ],
   },
   {
+    year: "2025",
+    items: [
+      "서울 데이터 펠로우십 기술자문",
+      "디지털 혁신기업 글로벌 성장 R바우처 — 부산문화회관 사내 규정·공연정보 챗봇 구축 실증",
+    ],
+  },
+  {
     year: "2026",
     highlight: true,
     items: [

@@ -7,7 +7,7 @@ import {
   staggerContainer,
   fadeInUp,
 } from "@/lib/motion";
-import { Factory, Microscope, Shield, MapPin } from "lucide-react";
+import { Factory, Microscope, Shield, MapPin, Building2 } from "lucide-react";
 
 const cases = [
   {
@@ -53,6 +53,15 @@ const cases = [
     desc: "소방 서비스 최적화, 보행자 밀집도 예측, 스쿨존 지정 등 공공 프로젝트를 자문했습니다.",
     metrics: [],
     results: ["소방차 출동경로 최적화", "도로 안전 취약지 분석", "스쿨존 지정"],
+  },
+  {
+    client: "부산문화회관",
+    badge: "R바우처 실증",
+    icon: Building2,
+    industry: "문화 · 공연",
+    desc: "디지털 혁신기업 글로벌 성장 R바우처 지원사업으로 사내 규정 및 공연정보 기반 AI 챗봇을 구축·실증했습니다.",
+    metrics: [],
+    results: ["사내 규정 챗봇", "공연정보 Q&A 챗봇", "KNie 실증"],
   },
 ];
 
